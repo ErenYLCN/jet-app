@@ -2,7 +2,7 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
-import { increment } from "./store/slices/counterSlice";
+import { increment, incrementAsync } from "./store/slices/counterSlice";
 
 function App() {
   const count = useAppSelector((state) => state.counter.value);
@@ -20,7 +20,9 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => dispatch(increment())}>count is {count}</button>
+        <button onClick={() => dispatch(increment())}>+1</button>
+        <button onClick={() => dispatch(incrementAsync())}>async +1</button>
+        <div>count is {count}</div>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>

@@ -15,8 +15,11 @@ export const counterSlice = createSlice({
     increment: (state) => {
       state.value += 1;
     },
+    incrementAsync: () => {
+      // Handled by saga
+    },
   },
 });
 
-export const { increment } = counterSlice.actions;
+export const { increment, incrementAsync } = counterSlice.actions;
 export default counterSlice.reducer;
