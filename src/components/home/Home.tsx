@@ -4,9 +4,9 @@ import { increment, incrementAsync } from "../../store/slices/counterSlice";
 import { fetchRestaurantsStart } from "../../store/slices/restaurantsSlice";
 import cn from "../../utils/classNames";
 
-import styles from "./App.module.css";
+import styles from "./Home.module.css";
 
-function App() {
+function Home() {
   const count = useAppSelector((state) => state.counter.value);
   const { restaurants, loading } = useAppSelector((state) => state.restaurants);
   const dispatch = useAppDispatch();
@@ -33,4 +33,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
