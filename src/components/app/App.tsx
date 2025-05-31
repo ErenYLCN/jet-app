@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { increment, incrementAsync } from "../../store/slices/counterSlice";
+import { getRestaurantsByPostcode } from "../../api/jetApi";
 import cn from "../../utils/classNames";
 
 import styles from "./App.module.css";
@@ -7,6 +9,19 @@ import styles from "./App.module.css";
 function App() {
   const count = useAppSelector((state) => state.counter.value);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const fetchRestaurants = async () => {
+      try {
+        const data = await getRestaurantsByPostcode();
+        console.log("Restaurants data:", data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchRestaurants();
+  }, []);
 
   return (
     <div className={cn(styles.app, "centered")}>
