@@ -1,0 +1,11 @@
+.card {
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  border: none;
+  background: inherit;
+  cursor: pointer;
+}
+
+.card:not(button) {
+  cursor: default;
+}
