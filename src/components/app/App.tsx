@@ -1,27 +1,25 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { increment, incrementAsync } from "../../store/slices/counterSlice";
-import { getRestaurantsByPostcode } from "../../api/jetApi";
+import { fetchRestaurantsStart } from "../../store/slices/restaurantsSlice";
 import cn from "../../utils/classNames";
 
 import styles from "./App.module.css";
 
 function App() {
   const count = useAppSelector((state) => state.counter.value);
+  const { restaurants, loading } = useAppSelector((state) => state.restaurants);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const fetchRestaurants = async () => {
-      try {
-        const data = await getRestaurantsByPostcode();
-        console.log("Restaurants data:", data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    dispatch(fetchRestaurantsStart("CT12EH"));
+  }, [dispatch]);
 
-    fetchRestaurants();
-  }, []);
+  useEffect(() => {
+    if (!loading && restaurants.length > 0) {
+      console.log("Restaurants data:", restaurants);
+    }
+  }, [restaurants, loading]);
 
   return (
     <div className={cn(styles.app, "centered")}>
