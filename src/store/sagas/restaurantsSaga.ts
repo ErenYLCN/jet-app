@@ -1,12 +1,15 @@
-import { call, put, takeEvery } from "redux-saga/effects";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import { call, put, select, takeEvery } from "redux-saga/effects";
 import type { SagaIterator } from "redux-saga";
 import { getRestaurantsByPostcode, type RestaurantsApiResponse } from "../../api/jetApi";
 import { fetchRestaurantsStart, fetchRestaurantsSuccess, fetchRestaurantsFailure } from "../slices/restaurantsSlice";
+import type { RootState } from "../types/storeTypes";
 
-function* fetchRestaurantsSaga(action: PayloadAction<string>): SagaIterator {
+const selectPostcode = (state: RootState) => state.user.postcode;
+
+function* fetchRestaurantsSaga(): SagaIterator {
   try {
-    const data: RestaurantsApiResponse = yield call(getRestaurantsByPostcode, action.payload);
+    const postcode: string = yield select(selectPostcode);
+    const data: RestaurantsApiResponse = yield call(getRestaurantsByPostcode, postcode);
     yield put(fetchRestaurantsSuccess(data.restaurants || []));
   } catch (error) {
     yield put(fetchRestaurantsFailure(error instanceof Error ? error.message : "Failed to fetch restaurants"));

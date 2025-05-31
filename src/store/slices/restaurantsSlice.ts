@@ -5,24 +5,21 @@ interface RestaurantsState {
   restaurants: Restaurant[];
   loading: boolean;
   error: string | null;
-  postcode: string;
 }
 
 const initialState: RestaurantsState = {
   restaurants: [],
   loading: false,
   error: null,
-  postcode: "",
 };
 
 const restaurantsSlice = createSlice({
   name: "restaurants",
   initialState,
   reducers: {
-    fetchRestaurantsStart: (state, action: PayloadAction<string>) => {
+    fetchRestaurantsStart: (state) => {
       state.loading = true;
       state.error = null;
-      state.postcode = action.payload;
     },
     fetchRestaurantsSuccess: (state, action: PayloadAction<Restaurant[]>) => {
       state.loading = false;
