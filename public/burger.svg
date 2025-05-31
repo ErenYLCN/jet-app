@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <!-- Top bun -->
+  <path d="M4 8c0-3 2.5-4 8-4s8 1 8 4v2H4V8z" fill="#E69138"/>
+  
+  <!-- Lettuce -->
+  <rect x="4" y="10" width="16" height="2" rx="1" fill="#7CB342"/>
+  
+  <!-- Tomato -->
+  <rect x="4" y="12" width="16" height="1.5" rx="0.5" fill="#FF6347"/>
+  
+  <!-- Meat -->
+  <rect x="4" y="13.5" width="16" height="3" rx="1" fill="#8D4E2A"/>
+  
+  <!-- Bottom bun -->
+  <rect x="4" y="16.5" width="16" height="4" rx="2" fill="#E69138"/>
+  
+  <!-- JET text -->
+  <text x="12" y="19" font-family="Arial, sans-serif" font-size="3" font-weight="bold" text-anchor="middle" fill="#8B4513">JET</text>
+  
+  <!-- Sesame seeds -->
+  <circle cx="7" cy="7" r="0.5" fill="#F5F5DC"/>
+  <circle cx="10" cy="6.5" r="0.5" fill="#F5F5DC"/>
+  <circle cx="13" cy="7.2" r="0.5" fill="#F5F5DC"/>
+  <circle cx="16" cy="6.8" r="0.5" fill="#F5F5DC"/>
+  <circle cx="9" cy="8.5" r="0.5" fill="#F5F5DC"/>
+  <circle cx="14" cy="8.8" r="0.5" fill="#F5F5DC"/>
+</svg>
