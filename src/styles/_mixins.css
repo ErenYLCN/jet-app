@@ -3,3 +3,16 @@
   justify-content: center;
   align-items: center;
 }
+
+.clickable {
+  cursor: pointer;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+}
