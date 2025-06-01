@@ -2,12 +2,13 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchRestaurantsStart } from "../../store/slices/restaurantsSlice";
 import RestaurantCard from "../restaurant-card/RestaurantCard";
+import Page from "../page/Page";
+import Button from "../ui/button/Button";
 
 import styles from "./Home.module.css";
 
 function Home() {
   const { restaurants, loading } = useAppSelector((state) => state.restaurants);
-  const { postcode } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -20,24 +21,41 @@ function Home() {
     }
   }, [restaurants, loading]);
 
+  const handleRefresh = () => {
+    dispatch(fetchRestaurantsStart());
+  };
+
   return (
-    <div className={styles.home}>
-      <p>Current postcode: {postcode}</p>
+    <Page
+      title="Restaurants Near You"
+      headerActions={
+        <Button onClick={handleRefresh} variant="secondary" size="sm">
+          Refresh
+        </Button>
+      }
+    >
+      <div className={styles.content}>
+        {loading && (
+          <p className={styles.loadingMessage}>Loading restaurants...</p>
+        )}
 
-      {loading && <p>Loading restaurants...</p>}
+        {!loading && restaurants.length > 0 && (
+          <ul className={styles.restaurantsList}>
+            {restaurants.map((restaurant) => (
+              <li className={styles.restaurantItem} key={restaurant.id}>
+                <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+              </li>
+            ))}
+          </ul>
+        )}
 
-      {!loading && restaurants.length > 0 && (
-        <div>
-          {restaurants.map((restaurant) => (
-            <li key={restaurant.id}>
-              <RestaurantCard restaurant={restaurant} />
-            </li>
-          ))}
-        </div>
-      )}
-
-      {!loading && restaurants.length === 0 && <p>No restaurants found for this postcode.</p>}
-    </div>
+        {!loading && restaurants.length === 0 && (
+          <p className={styles.emptyMessage}>
+            No restaurants found for this postcode.
+          </p>
+        )}
+      </div>
+    </Page>
   );
 }
 

@@ -1,7 +1,31 @@
-.home {
-  height: 100svh;
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.card {
-  padding: 2em;
+.restaurantsList {
+  width: 100%;
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.loadingMessage,
+.emptyMessage {
+  text-align: center;
+  padding: 48px 24px;
+  font-size: 1.125rem;
+  color: var(--secondary-text);
+}
+
+.loadingMessage {
+  color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .restaurantsList {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
 }

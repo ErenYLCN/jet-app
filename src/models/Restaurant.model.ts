@@ -16,4 +16,5 @@ export interface Restaurant {
     rangeUpper: number;
   };
   deliveryCost: number;
+  logoUrl: string;
 }
