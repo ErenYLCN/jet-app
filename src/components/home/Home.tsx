@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchRestaurantsStart } from "../../store/slices/restaurantsSlice";
-import RestaurantCard from "../restaurant/card/RestaurantCard";
 import Page from "../page/Page";
 import Button from "../ui/button/Button";
 import RestaurantSearchInput from "../restaurant/search-input/RestaurantSearchInput";
+import RestaurantList from "../restaurant/list/RestaurantList";
 import Spinner from "../ui/spinner/Spinner";
 import { useSearchParamState } from "../../hooks/useSearchParamState";
 
@@ -74,17 +74,7 @@ function Home() {
         )}
 
         {!loading && filteredRestaurants.length > 0 && (
-          <ul className={styles.restaurantsList}>
-            {filteredRestaurants.map((restaurant) => (
-              <li className={styles.restaurantItem} key={restaurant.id}>
-                <RestaurantCard
-                  customClassName="h-full"
-                  key={restaurant.id}
-                  restaurant={restaurant}
-                />
-              </li>
-            ))}
-          </ul>
+          <RestaurantList filteredRestaurants={filteredRestaurants} />
         )}
 
         {!loading &&

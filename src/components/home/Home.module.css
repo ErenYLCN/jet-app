@@ -17,20 +17,6 @@
   max-width: 480px;
 }
 
-.restaurantsList {
-  width: 100%;
-  gap: 16px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.restaurantItem {
-  flex: 1 1 calc(50% - 8px);
-  min-width: 280px;
-
-}
-
 .loadingMessage,
 .emptyMessage {
   text-align: center;
@@ -48,10 +34,4 @@
   justify-content: center;
   align-items: center;
   padding: 48px 24px;
-}
-
-@media (max-width: var(--screen-sm)) {
-  .restaurantItem {
-    flex: 1 1 100%;
-  }
 }
