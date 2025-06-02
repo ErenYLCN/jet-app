@@ -24,3 +24,9 @@
 .w-full {
   width: 100%;
 }
+
+.hide-sm {
+  @media (max-width: 768px), (max-width: var(--screen-sm)) {
+    display: none;
+  }
+}

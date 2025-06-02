@@ -14,11 +14,17 @@ function Home() {
   const { restaurants, loading } = useAppSelector((state) => state.restaurants);
   const dispatch = useAppDispatch();
   const [searchQuery, setSearchQuery] = useSearchParamState("q");
+  // TODO: Manage page number with query parameter
+  const [currentPage, setCurrentPage] = useState(1);
   const [inputValue, setInputValue] = useState(searchQuery || "");
 
   useEffect(() => {
     dispatch(fetchRestaurantsStart());
   }, [dispatch]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery]);
 
   const handleRefresh = () => {
     dispatch(fetchRestaurantsStart());
@@ -26,6 +32,21 @@ function Home() {
 
   const handleSearch = (value: string) => {
     setSearchQuery(value);
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+
+    setTimeout(() => {
+      // Try multiple scroll methods for better compatibility
+      if (document.documentElement) {
+        document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
+      } else if (document.body) {
+        document.body.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }, 0);
   };
 
   // Filter restaurants based on search query
@@ -74,7 +95,11 @@ function Home() {
         )}
 
         {!loading && filteredRestaurants.length > 0 && (
-          <RestaurantList filteredRestaurants={filteredRestaurants} />
+          <RestaurantList
+            filteredRestaurants={filteredRestaurants}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+          />
         )}
 
         {!loading &&

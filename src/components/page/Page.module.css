@@ -12,7 +12,7 @@
   width: 100%;
 }
 
-@media (max-width: var(--screen-sm)) {
+@media (max-width: 768px), (max-width: var(--screen-sm)) {
   .content {
     padding: 16px;
   }

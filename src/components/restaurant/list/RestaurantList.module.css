@@ -1,3 +1,7 @@
+.restaurantListContainer {
+  width: 100%;
+}
+
 .restaurantsList {
   width: 100%;
   gap: 16px;
@@ -9,10 +13,12 @@
 .restaurantItem {
   flex: 1 1 calc(50% - 8px);
   min-width: 280px;
+  max-width: calc(50% - 8px);
 }
 
-@media (max-width: var(--screen-sm)) {
+@media (max-width: 768px), (max-width: var(--screen-sm)) {
   .restaurantItem {
     flex: 1 1 100%;
+    max-width: 100%;
   }
 }
