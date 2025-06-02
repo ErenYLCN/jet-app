@@ -5,15 +5,16 @@ import styles from "./RestaurantCard.module.css";
 interface RestaurantCardProps {
   restaurant: Restaurant;
   customClassName?: string;
+  onClick?: () => void;
 }
 
 export default function RestaurantCard({
   restaurant,
   customClassName,
+  onClick,
 }: RestaurantCardProps) {
   const handleClick = () => {
-    // TODO: Open a modal or navigate to restaurant details page
-    console.log(restaurant);
+    onClick?.();
   };
 
   const formatDeliveryTime = () => {

@@ -9,6 +9,7 @@ interface RestaurantListProps {
   itemsPerPage?: number;
   currentPage?: number;
   onPageChange?: (page: number) => void;
+  onRestaurantClick?: (restaurant: Restaurant) => void;
 }
 
 function RestaurantList({
@@ -16,6 +17,7 @@ function RestaurantList({
   itemsPerPage = 12,
   currentPage = 1,
   onPageChange,
+  onRestaurantClick,
 }: RestaurantListProps) {
   const totalPages = Math.ceil(filteredRestaurants.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -27,7 +29,11 @@ function RestaurantList({
       <ul className={styles.restaurantsList}>
         {currentRestaurants.map((restaurant) => (
           <li className={styles.restaurantItem} key={restaurant.id}>
-            <RestaurantCard customClassName="h-full" restaurant={restaurant} />
+            <RestaurantCard
+              customClassName="h-full"
+              restaurant={restaurant}
+              onClick={() => onRestaurantClick?.(restaurant)}
+            />
           </li>
         ))}
       </ul>

@@ -6,7 +6,10 @@ import Button from "../ui/button/Button";
 import RestaurantSearchInput from "../restaurant/search-input/RestaurantSearchInput";
 import RestaurantList from "../restaurant/list/RestaurantList";
 import Spinner from "../ui/spinner/Spinner";
+import RestaurantDetailModal from "../restaurant/detail-modal/RestaurantDetailModal";
 import { useSearchParamState } from "../../hooks/useSearchParamState";
+import useModalState from "../../hooks/useModalState";
+import type { Restaurant } from "../../models/Restaurant.model";
 
 import styles from "./Home.module.css";
 
@@ -17,6 +20,13 @@ function Home() {
   // TODO: Manage page number with query parameter
   const [currentPage, setCurrentPage] = useState(1);
   const [inputValue, setInputValue] = useState(searchQuery || "");
+  const [selectedRestaurant, setSelectedRestaurant] =
+    useState<Restaurant | null>(null);
+  const {
+    isOpen: isModalOpen,
+    open: openModal,
+    close: closeModal,
+  } = useModalState();
 
   useEffect(() => {
     dispatch(fetchRestaurantsStart());
@@ -47,6 +57,11 @@ function Home() {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
     }, 0);
+  };
+
+  const handleRestaurantClick = (restaurant: Restaurant) => {
+    setSelectedRestaurant(restaurant);
+    openModal();
   };
 
   // Filter restaurants based on search query
@@ -99,6 +114,7 @@ function Home() {
             filteredRestaurants={filteredRestaurants}
             currentPage={currentPage}
             onPageChange={handlePageChange}
+            onRestaurantClick={handleRestaurantClick}
           />
         )}
 
@@ -116,6 +132,12 @@ function Home() {
           </p>
         )}
       </div>
+
+      <RestaurantDetailModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        restaurant={selectedRestaurant}
+      />
     </Page>
   );
 }
