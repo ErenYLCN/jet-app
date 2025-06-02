@@ -49,17 +49,23 @@ function Home() {
       }
     >
       <div className={styles.content}>
-        <RestaurantSearchInput
-          value={inputValue}
-          onChange={(value) => {
-            setInputValue(value);
+        <div className={styles.searchContainer}>
+          <div className={styles.searchWrapper}>
+            <RestaurantSearchInput
+              value={inputValue}
+              onChange={(value) => {
+                setInputValue(value);
 
-            if (value === "") {
-              setSearchQuery("");
-            }
-          }}
-          onSearch={handleSearch}
-        />
+                if (value === "") {
+                  setSearchQuery("");
+                }
+              }}
+              onSearch={handleSearch}
+            />
+
+            {/* TODO: Add a sorting dropdown */}
+          </div>
+        </div>
 
         {loading && (
           <div className={styles.loadingContainer}>
@@ -71,7 +77,11 @@ function Home() {
           <ul className={styles.restaurantsList}>
             {filteredRestaurants.map((restaurant) => (
               <li className={styles.restaurantItem} key={restaurant.id}>
-                <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+                <RestaurantCard
+                  customClassName="h-full"
+                  key={restaurant.id}
+                  restaurant={restaurant}
+                />
               </li>
             ))}
           </ul>

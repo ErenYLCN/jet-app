@@ -4,9 +4,13 @@ import styles from "./RestaurantCard.module.css";
 
 interface RestaurantCardProps {
   restaurant: Restaurant;
+  customClassName?: string;
 }
 
-export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
+export default function RestaurantCard({
+  restaurant,
+  customClassName,
+}: RestaurantCardProps) {
   const handleClick = () => {
     // TODO: Open a modal or navigate to restaurant details page
     console.log(restaurant);
@@ -29,7 +33,7 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
 
   return (
     <div
-      className={styles.card}
+      className={cn(styles.card, customClassName)}
       onClick={handleClick}
       role="button"
       tabIndex={0}

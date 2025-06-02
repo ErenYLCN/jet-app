@@ -5,11 +5,30 @@
   gap: 16px;
 }
 
+.searchContainer {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.searchWrapper {
+  width: 100%;
+  max-width: 480px;
+}
+
 .restaurantsList {
   width: 100%;
   gap: 16px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.restaurantItem {
+  flex: 1 1 calc(50% - 8px);
+  min-width: 280px;
+
 }
 
 .loadingMessage,
@@ -31,8 +50,8 @@
   padding: 48px 24px;
 }
 
-@media (max-width: 768px) {
-  .restaurantsList {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+@media (max-width: var(--screen-sm)) {
+  .restaurantItem {
+    flex: 1 1 100%;
   }
 }

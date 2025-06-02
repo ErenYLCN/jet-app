@@ -16,3 +16,11 @@
   -webkit-box-orient: vertical;
   display: -webkit-box;
 }
+
+.h-full {
+  height: 100%;
+}
+
+.w-full {
+  width: 100%;
+}
