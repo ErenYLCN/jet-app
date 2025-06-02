@@ -45,7 +45,7 @@
 }
 
 .name {
-  font-size: 1.125rem;
+  font-size: var(--font-size-lg);
   font-weight: 600;
   margin: 0;
   color: var(--text-color);
@@ -56,13 +56,12 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
   color: var(--secondary-text);
 }
 
 .starIcon {
   color: var(--primary-color);
-  font-size: 1rem;
   margin-top: -2px;
 }
 
@@ -84,7 +83,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 6px 16px;
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
   color: var(--secondary-text);
   margin-top: 2px;
 }

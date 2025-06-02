@@ -1,15 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchRestaurantsStart } from "../../store/slices/restaurantsSlice";
-import RestaurantCard from "../restaurant-card/RestaurantCard";
+import RestaurantCard from "../restaurant/card/RestaurantCard";
 import Page from "../page/Page";
 import Button from "../ui/button/Button";
+import RestaurantSearchInput from "../restaurant/search-input/RestaurantSearchInput";
 
 import styles from "./Home.module.css";
 
 function Home() {
   const { restaurants, loading } = useAppSelector((state) => state.restaurants);
   const dispatch = useAppDispatch();
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     dispatch(fetchRestaurantsStart());
@@ -25,6 +27,17 @@ function Home() {
     dispatch(fetchRestaurantsStart());
   };
 
+  // Filter restaurants based on search query
+  const filteredRestaurants = searchQuery
+    ? restaurants.filter(
+        (restaurant) =>
+          restaurant.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          restaurant.cuisines.some((cuisine) =>
+            cuisine.name.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+      )
+    : restaurants;
+
   return (
     <Page
       title="Restaurants Near You"
@@ -35,19 +48,29 @@ function Home() {
       }
     >
       <div className={styles.content}>
+        <RestaurantSearchInput value={searchQuery} onChange={setSearchQuery} />
+
         {loading && (
           <p className={styles.loadingMessage}>Loading restaurants...</p>
         )}
 
-        {!loading && restaurants.length > 0 && (
+        {!loading && filteredRestaurants.length > 0 && (
           <ul className={styles.restaurantsList}>
-            {restaurants.map((restaurant) => (
+            {filteredRestaurants.map((restaurant) => (
               <li className={styles.restaurantItem} key={restaurant.id}>
                 <RestaurantCard key={restaurant.id} restaurant={restaurant} />
               </li>
             ))}
           </ul>
         )}
+
+        {!loading &&
+          restaurants.length > 0 &&
+          filteredRestaurants.length === 0 && (
+            <p className={styles.emptyMessage}>
+              No restaurants match your search for "{searchQuery}".
+            </p>
+          )}
 
         {!loading && restaurants.length === 0 && (
           <p className={styles.emptyMessage}>

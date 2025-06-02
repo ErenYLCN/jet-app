@@ -33,7 +33,7 @@
 }
 
 .title {
-  font-size: 1.875rem;
+  font-size: var(--font-size-2xl);
   font-weight: 700;
   color: var(--text-color);
   margin: 0;
@@ -41,7 +41,6 @@
 }
 
 .address {
-  font-size: 1rem;
   font-weight: 500;
   color: var(--text-color-secondary, #64748b);
   text-align: center;
@@ -69,11 +68,11 @@
   }
   
   .title {
-    font-size: 1.5rem;
+    font-size: var(--font-size-xl);
   }
   
   .address {
-    font-size: 0.875rem;
+    font-size: var(--font-size-sm);
   }
   
   .headerActions {

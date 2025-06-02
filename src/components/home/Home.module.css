@@ -16,7 +16,7 @@
 .emptyMessage {
   text-align: center;
   padding: 48px 24px;
-  font-size: 1.125rem;
+  font-size: var(--font-size-lg);
   color: var(--secondary-text);
 }
 

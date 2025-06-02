@@ -1,0 +1,12 @@
+.searchContainer {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.clearButton {
+  color: var(--secondary-text);
+}
+
+.clearButton:hover {
+  color: var(--text-color);
+}
