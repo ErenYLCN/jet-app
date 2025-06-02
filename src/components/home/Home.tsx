@@ -1,17 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchRestaurantsStart } from "../../store/slices/restaurantsSlice";
 import RestaurantCard from "../restaurant/card/RestaurantCard";
 import Page from "../page/Page";
 import Button from "../ui/button/Button";
 import RestaurantSearchInput from "../restaurant/search-input/RestaurantSearchInput";
+import { useSearchParamState } from "../../hooks/useSearchParamState";
 
 import styles from "./Home.module.css";
 
 function Home() {
   const { restaurants, loading } = useAppSelector((state) => state.restaurants);
   const dispatch = useAppDispatch();
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useSearchParamState("q");
 
   useEffect(() => {
     dispatch(fetchRestaurantsStart());
