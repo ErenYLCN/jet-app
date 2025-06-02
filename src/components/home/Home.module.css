@@ -24,6 +24,13 @@
   color: var(--primary-color);
 }
 
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 48px 24px;
+}
+
 @media (max-width: 768px) {
   .restaurantsList {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));

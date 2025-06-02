@@ -33,9 +33,9 @@
 }
 
 .title {
+  color: var(--primary-color);
   font-size: var(--font-size-2xl);
   font-weight: 700;
-  color: var(--text-color);
   margin: 0;
   line-height: 1.2;
 }

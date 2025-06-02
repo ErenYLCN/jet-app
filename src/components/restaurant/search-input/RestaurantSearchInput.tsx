@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import Input from "../../ui/input/Input";
 import IconButton from "../../ui/icon-button/IconButton";
+import Button from "../../ui/button/Button";
 import SearchIcon from "../../../assets/search.svg";
 import CloseIcon from "../../../assets/close.svg";
 
@@ -9,12 +10,14 @@ import styles from "./RestaurantSearchInput.module.css";
 interface RestaurantSearchInputProps {
   value: string;
   onChange: (value: string) => void;
+  onSearch: (value: string) => void;
   placeholder?: string;
 }
 
 function RestaurantSearchInput({
   value,
   onChange,
+  onSearch,
 }: RestaurantSearchInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -22,8 +25,19 @@ function RestaurantSearchInput({
     onChange(e.target.value);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      onSearch(value);
+    }
+  };
+
+  const handleSearch = () => {
+    onSearch(value);
+  };
+
   const clearSearch = () => {
     onChange("");
+    onSearch("");
 
     if (inputRef.current) {
       inputRef.current.focus();
@@ -37,18 +51,26 @@ function RestaurantSearchInput({
         placeholder={"Search for restaurants or cuisines..."}
         value={value}
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
         leftIcon={<img src={SearchIcon} alt="Search" />}
         rightActions={
-          value ? (
-            <IconButton
-              description="Clear search"
-              size="sm"
-              onClick={clearSearch}
-              className={styles.clearButton}
-            >
-              <img src={CloseIcon} alt="" />
-            </IconButton>
-          ) : undefined
+          <div className={styles.rightActions}>
+            {value && (
+              <>
+                <IconButton
+                  description="Clear search"
+                  size="sm"
+                  onClick={clearSearch}
+                  className={styles.clearButton}
+                >
+                  <img src={CloseIcon} alt="" />
+                </IconButton>
+                <Button onClick={handleSearch} variant="primary" size="lg">
+                  Search
+                </Button>
+              </>
+            )}
+          </div>
         }
       />
     </div>

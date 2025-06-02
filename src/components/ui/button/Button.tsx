@@ -1,5 +1,6 @@
 import cn from "../../../utils/classNames";
 import styles from "./Button.module.css";
+import Spinner from "../spinner/Spinner";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   left?: React.ReactNode;
@@ -43,9 +44,15 @@ export default function Button({
       aria-atomic={true}
       {...props}
     >
-      {left}
-      {children}
-      {right}
+      {loading ? (
+        <Spinner size="small" />
+      ) : (
+        <>
+          {left}
+          {children}
+          {right}
+        </>
+      )}
     </button>
   );
 }

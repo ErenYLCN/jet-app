@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchRestaurantsStart } from "../../store/slices/restaurantsSlice";
 import RestaurantCard from "../restaurant/card/RestaurantCard";
 import Page from "../page/Page";
 import Button from "../ui/button/Button";
 import RestaurantSearchInput from "../restaurant/search-input/RestaurantSearchInput";
+import Spinner from "../ui/spinner/Spinner";
 import { useSearchParamState } from "../../hooks/useSearchParamState";
 
 import styles from "./Home.module.css";
@@ -13,19 +14,18 @@ function Home() {
   const { restaurants, loading } = useAppSelector((state) => state.restaurants);
   const dispatch = useAppDispatch();
   const [searchQuery, setSearchQuery] = useSearchParamState("q");
+  const [inputValue, setInputValue] = useState(searchQuery || "");
 
   useEffect(() => {
     dispatch(fetchRestaurantsStart());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (!loading && restaurants.length > 0) {
-      console.log("Restaurants data:", restaurants);
-    }
-  }, [restaurants, loading]);
-
   const handleRefresh = () => {
     dispatch(fetchRestaurantsStart());
+  };
+
+  const handleSearch = (value: string) => {
+    setSearchQuery(value);
   };
 
   // Filter restaurants based on search query
@@ -49,10 +49,22 @@ function Home() {
       }
     >
       <div className={styles.content}>
-        <RestaurantSearchInput value={searchQuery} onChange={setSearchQuery} />
+        <RestaurantSearchInput
+          value={inputValue}
+          onChange={(value) => {
+            setInputValue(value);
+
+            if (value === "") {
+              setSearchQuery("");
+            }
+          }}
+          onSearch={handleSearch}
+        />
 
         {loading && (
-          <p className={styles.loadingMessage}>Loading restaurants...</p>
+          <div className={styles.loadingContainer}>
+            <Spinner />
+          </div>
         )}
 
         {!loading && filteredRestaurants.length > 0 && (

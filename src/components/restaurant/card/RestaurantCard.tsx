@@ -8,6 +8,7 @@ interface RestaurantCardProps {
 
 export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
   const handleClick = () => {
+    // TODO: Open a modal or navigate to restaurant details page
     console.log(restaurant);
   };
 
