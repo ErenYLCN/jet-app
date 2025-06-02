@@ -34,6 +34,7 @@ export default function Button({
         styles.button,
         styles[variant],
         styles[size],
+        loading && styles.loading,
         customClassName,
         className
       )}

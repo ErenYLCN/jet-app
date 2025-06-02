@@ -70,7 +70,15 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
             </span>
           )}
           {restaurant.deliveryCost !== null && (
-            <span className={styles.deliveryFee}>🚴 {formatDeliveryFee()}</span>
+            <span
+              className={
+                restaurant.deliveryCost === 0
+                  ? styles.deliveryFeeFree
+                  : styles.deliveryFee
+              }
+            >
+              🚴 {formatDeliveryFee()}
+            </span>
           )}
         </div>
       </div>

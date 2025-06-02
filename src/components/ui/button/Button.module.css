@@ -58,3 +58,19 @@
 .secondary:hover:not(:disabled) {
   background-color: var(--secondary-hover);
 }
+
+.loading {
+  justify-content: center;
+}
+
+.loading.sm {
+  min-width: 80px;
+}
+
+.loading.md {
+  min-width: 100px;
+}
+
+.loading.lg {
+  min-width: 120px;
+}
