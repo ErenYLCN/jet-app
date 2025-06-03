@@ -8,7 +8,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test:unit": "jest --no-errors-on-unmatched-pattern"
+    "test:unit": "jest --no-errors-on-unmatched-pattern",
+    "test:coverage": "jest --coverage --no-errors-on-unmatched-pattern",
+    "test:coverage:report": "open coverage/lcov-report/index.html"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",

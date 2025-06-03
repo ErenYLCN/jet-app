@@ -151,4 +151,65 @@ describe("Modal Component", () => {
     expect(modal).toHaveAttribute("aria-labelledby", "modal-title");
     expect(modal).toHaveAttribute("tabIndex", "-1");
   });
+
+  test("traps focus within modal with Tab key", () => {
+    render(
+      <Modal isOpen={true} onClose={mockOnClose} title="Focus Trap Modal">
+        <button>First button</button>
+        <input placeholder="Input field" />
+        <button>Last button</button>
+      </Modal>
+    );
+
+    const lastButton = screen.getByText("Last button");
+    const closeButton = screen.getByRole("button", { name: /close modal/i });
+
+    // Focus the first focusable element (close button)
+    closeButton.focus();
+    expect(closeButton).toHaveFocus();
+
+    // Tab from last element should go to first
+    lastButton.focus();
+    fireEvent.keyDown(document, { key: "Tab" });
+    expect(closeButton).toHaveFocus();
+
+    // Shift+Tab from first element should go to last
+    closeButton.focus();
+    fireEvent.keyDown(document, { key: "Tab", shiftKey: true });
+    expect(lastButton).toHaveFocus();
+  });
+
+  test("does not trap focus when modal is closed", () => {
+    render(
+      <Modal isOpen={false} onClose={mockOnClose} title="Closed Modal">
+        <button>Test button</button>
+      </Modal>
+    );
+
+    // Tab key should not be handled when modal is closed
+    const tabEvent = new KeyboardEvent("keydown", { key: "Tab" });
+    const preventDefaultSpy = jest.spyOn(tabEvent, "preventDefault");
+
+    fireEvent.keyDown(document, tabEvent);
+
+    expect(preventDefaultSpy).not.toHaveBeenCalled();
+  });
+
+  test("ignores non-Tab key events in focus trap", () => {
+    render(
+      <Modal isOpen={true} onClose={mockOnClose} title="Modal">
+        <button>Test button</button>
+      </Modal>
+    );
+
+    const button = screen.getByText("Test button");
+    button.focus();
+
+    // Non-Tab keys should be ignored
+    fireEvent.keyDown(document, { key: "Enter" });
+    fireEvent.keyDown(document, { key: "Space" });
+    fireEvent.keyDown(document, { key: "ArrowDown" });
+
+    expect(button).toHaveFocus();
+  });
 });

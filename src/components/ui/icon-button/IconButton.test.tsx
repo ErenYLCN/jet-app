@@ -76,4 +76,73 @@ describe("IconButton Component", () => {
     await user.click(button);
     expect(handleClick).not.toHaveBeenCalled();
   });
+
+  test("handles Enter key press", async () => {
+    const handleClick = jest.fn();
+    const user = userEvent.setup();
+
+    render(
+      <IconButton description="Keyboard button" onClick={handleClick}>
+        <svg data-testid="icon" />
+      </IconButton>
+    );
+
+    const button = screen.getByRole("button");
+    button.focus();
+    await user.keyboard("{Enter}");
+
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+
+  test("handles Space key press", async () => {
+    const handleClick = jest.fn();
+    const user = userEvent.setup();
+
+    render(
+      <IconButton description="Keyboard button" onClick={handleClick}>
+        <svg data-testid="icon" />
+      </IconButton>
+    );
+
+    const button = screen.getByRole("button");
+    button.focus();
+    await user.keyboard(" ");
+
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+
+  test("does not trigger onClick on keyboard when disabled", async () => {
+    const handleClick = jest.fn();
+    const user = userEvent.setup();
+
+    render(
+      <IconButton description="Disabled button" disabled onClick={handleClick}>
+        <svg data-testid="icon" />
+      </IconButton>
+    );
+
+    const button = screen.getByRole("button");
+    button.focus();
+    await user.keyboard("{Enter}");
+    await user.keyboard(" ");
+
+    expect(handleClick).not.toHaveBeenCalled();
+  });
+
+  test("calls custom onKeyDown handler", async () => {
+    const handleKeyDown = jest.fn();
+    const user = userEvent.setup();
+
+    render(
+      <IconButton description="Custom keydown" onKeyDown={handleKeyDown}>
+        <svg data-testid="icon" />
+      </IconButton>
+    );
+
+    const button = screen.getByRole("button");
+    button.focus();
+    await user.keyboard("a");
+
+    expect(handleKeyDown).toHaveBeenCalledTimes(1);
+  });
 });

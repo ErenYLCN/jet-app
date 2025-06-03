@@ -153,6 +153,7 @@ describe("Pagination Component", () => {
         currentPage={1}
         totalPages={3}
         onPageChange={mockOnPageChange}
+        showPageNumbers={true}
       />
     );
 
@@ -160,5 +161,130 @@ describe("Pagination Component", () => {
     await user.click(pageButton);
 
     expect(mockOnPageChange).toHaveBeenCalledWith(3);
+  });
+
+  test("shows ellipsis when there are many pages", () => {
+    render(
+      <Pagination
+        currentPage={5}
+        totalPages={20}
+        onPageChange={mockOnPageChange}
+        showPageNumbers={true}
+      />
+    );
+
+    // Should show ellipsis
+    const ellipses = screen.getAllByText("...");
+    expect(ellipses.length).toBeGreaterThan(0);
+  });
+
+  test("shows first page and ellipsis when current page is in middle", () => {
+    render(
+      <Pagination
+        currentPage={10}
+        totalPages={20}
+        onPageChange={mockOnPageChange}
+        showPageNumbers={true}
+      />
+    );
+
+    // Should show page 1, ellipsis, current page range, ellipsis, and last page
+    expect(screen.getByText("1")).toBeInTheDocument();
+    expect(screen.getByText("20")).toBeInTheDocument();
+    expect(screen.getAllByText("...").length).toBeGreaterThan(0);
+  });
+
+  test("shows all pages when total is within maxVisiblePages", () => {
+    render(
+      <Pagination
+        currentPage={3}
+        totalPages={5}
+        onPageChange={mockOnPageChange}
+        showPageNumbers={true}
+      />
+    );
+
+    for (let i = 1; i <= 5; i++) {
+      expect(screen.getByText(i.toString())).toBeInTheDocument();
+    }
+    expect(screen.queryByText("...")).not.toBeInTheDocument();
+  });
+
+  test("shows ellipsis only at end when current page is near start", () => {
+    render(
+      <Pagination
+        currentPage={2}
+        totalPages={20}
+        onPageChange={mockOnPageChange}
+        showPageNumbers={true}
+      />
+    );
+
+    expect(screen.getByText("1")).toBeInTheDocument();
+    expect(screen.getByText("20")).toBeInTheDocument();
+    const ellipses = screen.getAllByText("...");
+    expect(ellipses.length).toBeGreaterThan(0);
+  });
+
+  test("shows ellipsis only at start when current page is near end", () => {
+    render(
+      <Pagination
+        currentPage={19}
+        totalPages={20}
+        onPageChange={mockOnPageChange}
+        showPageNumbers={true}
+      />
+    );
+
+    expect(screen.getByText("1")).toBeInTheDocument();
+    expect(screen.getByText("20")).toBeInTheDocument();
+    expect(screen.getByText("19")).toBeInTheDocument();
+    const ellipses = screen.getAllByText("...");
+    expect(ellipses.length).toBeGreaterThan(0);
+  });
+
+  test("current page button is disabled and has aria-current", () => {
+    render(
+      <Pagination
+        currentPage={3}
+        totalPages={5}
+        onPageChange={mockOnPageChange}
+        showPageNumbers={true}
+      />
+    );
+
+    const currentPageButton = screen.getByText("3");
+    expect(currentPageButton).toBeDisabled();
+    expect(currentPageButton).toHaveAttribute("aria-current", "page");
+  });
+
+  test("non-current page buttons do not have aria-current", () => {
+    render(
+      <Pagination
+        currentPage={3}
+        totalPages={5}
+        onPageChange={mockOnPageChange}
+        showPageNumbers={true}
+      />
+    );
+
+    const otherPageButton = screen.getByText("2");
+    expect(otherPageButton).not.toHaveAttribute("aria-current");
+  });
+
+  test("has proper aria labels", () => {
+    render(
+      <Pagination
+        currentPage={2}
+        totalPages={5}
+        onPageChange={mockOnPageChange}
+        showPageNumbers={true}
+      />
+    );
+
+    expect(screen.getByLabelText("Go to previous page")).toBeInTheDocument();
+    expect(screen.getByLabelText("Go to next page")).toBeInTheDocument();
+    expect(screen.getByLabelText("Go to page 1")).toBeInTheDocument();
+    expect(screen.getByLabelText("Pagination")).toBeInTheDocument();
   });
 });
