@@ -24,4 +24,6 @@
   --font-size-2xl: 2rem; 
 
   --screen-sm: 768px;
+
+  --outline: 2px solid var(--primary-color);
 }

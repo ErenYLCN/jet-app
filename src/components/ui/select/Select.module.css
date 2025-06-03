@@ -41,6 +41,11 @@
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
+.select:focus-visible {
+  outline: var(--outline);
+  outline-offset: 2px;
+}
+
 .select:disabled {
   background-color: var(--secondary-color);
   color: var(--secondary-text);
