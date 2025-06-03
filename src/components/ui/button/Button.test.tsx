@@ -84,16 +84,11 @@ describe("Button Component", () => {
     expect(button).toHaveAttribute("aria-disabled", "true");
   });
 
-  test("applies additional classes from customClassName and className", () => {
-    render(
-      <Button customClassName="custom-class" className="regular-class">
-        Click me
-      </Button>
-    );
+  test("applies additional classes from customClassName", () => {
+    render(<Button customClassName="custom-class">Click me</Button>);
 
     const button = screen.getByRole("button", { name: /click me/i });
     expect(button).toHaveClass("custom-class");
-    expect(button).toHaveClass("regular-class");
   });
 
   test("renders with left and right content", () => {

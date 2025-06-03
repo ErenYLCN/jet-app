@@ -83,7 +83,7 @@ function Pagination({
         disabled={currentPage === 1}
         variant="secondary"
         size="sm"
-        className={styles.navButton}
+        customClassName={styles.navButton}
         aria-label="Go to previous page"
       >
         Previous
@@ -109,7 +109,7 @@ function Pagination({
               <Button
                 key={pageNumber}
                 onClick={() => onPageChange(pageNumber)}
-                className={`${styles.pageButton} ${
+                customClassName={`${styles.pageButton} ${
                   isActive ? styles.active : "hide-sm"
                 }`}
                 disabled={isActive}
@@ -128,7 +128,7 @@ function Pagination({
         disabled={currentPage === totalPages}
         variant="secondary"
         size="sm"
-        className={styles.navButton}
+        customClassName={styles.navButton}
         aria-label="Go to next page"
       >
         Next
