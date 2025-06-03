@@ -22,6 +22,7 @@
 .modal {
   background: white;
   border-radius: 8px;
+  min-width: 480px;
   max-width: 90vw;
   max-height: 90vh;
   overflow-y: auto;
@@ -35,6 +36,7 @@
     height: 100vh;
     max-width: 100vw;
     max-height: 100vh;
+    min-width: unset;
     border-radius: 0;
     display: flex;
     flex-direction: column;
