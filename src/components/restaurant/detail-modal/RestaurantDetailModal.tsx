@@ -1,5 +1,6 @@
 import Modal from "../../ui/modal/Modal";
 import IconButton from "../../ui/icon-button/button/IconButton";
+import RestaurantMapView from "../map-view/RestaurantMapView";
 import type { Restaurant } from "../../../models/Restaurant.model";
 import styles from "./RestaurantDetailModal.module.css";
 
@@ -27,6 +28,10 @@ function RestaurantDetailModal({
             customClassName={styles.closeButton}
             icon="close"
           />
+        </div>
+
+        <div className={styles.mapSection}>
+          <RestaurantMapView restaurant={restaurant} height="300px" />
         </div>
 
         <div className={styles.header}>

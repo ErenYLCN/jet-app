@@ -5,6 +5,10 @@ export interface Restaurant {
     firstLine?: string;
     city?: string;
     postalCode?: string;
+    location?: {
+      type: "Point";
+      coordinates: [number, number]; // [longitude, latitude]
+    };
   };
   rating?: {
     starRating?: number;

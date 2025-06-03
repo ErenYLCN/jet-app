@@ -123,3 +123,9 @@
   color: #111827;
   font-weight: 500;
 }
+
+.mapSection {
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
