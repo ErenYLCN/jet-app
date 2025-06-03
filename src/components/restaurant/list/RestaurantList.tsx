@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import RestaurantCard from "../card/RestaurantCard";
 import Pagination from "../../ui/pagination/Pagination";
 import type { Restaurant } from "../../../models/Restaurant.model";
@@ -23,6 +24,12 @@ function RestaurantList({
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentRestaurants = filteredRestaurants.slice(startIndex, endIndex);
+
+  useEffect(() => {
+    if (totalPages > 0 && currentPage > totalPages && onPageChange) {
+      onPageChange(1);
+    }
+  }, [currentPage, totalPages, onPageChange]);
 
   return (
     <div className={styles.restaurantListContainer}>

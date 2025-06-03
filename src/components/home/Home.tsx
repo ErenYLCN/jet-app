@@ -7,7 +7,7 @@ import RestaurantSearchInput from "../restaurant/search-input/RestaurantSearchIn
 import RestaurantList from "../restaurant/list/RestaurantList";
 import Spinner from "../ui/spinner/Spinner";
 import RestaurantDetailModal from "../restaurant/detail-modal/RestaurantDetailModal";
-import { useSearchParamState } from "../../hooks/useSearchParamState";
+import { useRestaurantListState } from "../../hooks/useRestaurantListState";
 import useModalState from "../../hooks/useModalState";
 import type { Restaurant } from "../../models/Restaurant.model";
 
@@ -16,9 +16,8 @@ import styles from "./Home.module.css";
 function Home() {
   const { restaurants, loading } = useAppSelector((state) => state.restaurants);
   const dispatch = useAppDispatch();
-  const [searchQuery, setSearchQuery] = useSearchParamState("q");
-  // TODO: Manage page number with query parameter
-  const [currentPage, setCurrentPage] = useState(1);
+  const { searchQuery, page, setSearchQuery, setPage } =
+    useRestaurantListState();
   const [inputValue, setInputValue] = useState(searchQuery || "");
   const [selectedRestaurant, setSelectedRestaurant] =
     useState<Restaurant | null>(null);
@@ -32,10 +31,6 @@ function Home() {
     dispatch(fetchRestaurantsStart());
   }, [dispatch]);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchQuery]);
-
   const handleRefresh = () => {
     dispatch(fetchRestaurantsStart());
   };
@@ -44,8 +39,8 @@ function Home() {
     setSearchQuery(value);
   };
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+  const handlePageChange = (pageNumber: number) => {
+    setPage(pageNumber);
 
     setTimeout(() => {
       // Try multiple scroll methods for better compatibility
@@ -112,7 +107,7 @@ function Home() {
         {!loading && filteredRestaurants.length > 0 && (
           <RestaurantList
             filteredRestaurants={filteredRestaurants}
-            currentPage={currentPage}
+            currentPage={page}
             onPageChange={handlePageChange}
             onRestaurantClick={handleRestaurantClick}
           />
