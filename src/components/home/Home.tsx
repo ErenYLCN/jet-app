@@ -10,6 +10,7 @@ import Spinner from "../ui/spinner/Spinner";
 import RestaurantDetailModal from "../restaurant/detail-modal/RestaurantDetailModal";
 import RestaurantErrorMessage from "../restaurant/error-message/RestaurantErrorMessage";
 import UserModal from "../user/modal/UserModal";
+import Select from "../ui/select/Select";
 import { useRestaurantListState } from "../../hooks/restaurant-list-state/useRestaurantListState";
 import useModalState from "../../hooks/modal-state/useModalState";
 import type { Restaurant } from "../../models/Restaurant.model";
@@ -26,6 +27,7 @@ function Home() {
   const [inputValue, setInputValue] = useState(searchQuery || "");
   const [selectedRestaurant, setSelectedRestaurant] =
     useState<Restaurant | null>(null);
+  const [sortOption, setSortOption] = useState("name");
   const {
     isOpen: isRestaurantDetailModalOpen,
     open: openRestaurantDetailModal,
@@ -97,6 +99,7 @@ function Home() {
         <div className={styles.searchContainer}>
           <div className={styles.searchWrapper}>
             <RestaurantSearchInput
+              customClassName={styles.searchInput}
               value={inputValue}
               onChange={(value) => {
                 setInputValue(value);
@@ -108,7 +111,18 @@ function Home() {
               onSearch={handleSearch}
             />
 
-            {/* TODO: Add a sorting dropdown */}
+            <Select
+              label="Sort by"
+              options={[
+                { value: "name", label: "Name (A-Z)" },
+                { value: "rating", label: "Rating (High to Low)" },
+                { value: "deliveryTime", label: "Delivery Time" },
+                { value: "deliveryCost", label: "Delivery Cost" },
+              ]}
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value)}
+              customClassName={styles.sortSelect}
+            />
           </div>
         </div>
 

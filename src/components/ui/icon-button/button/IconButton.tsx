@@ -66,6 +66,4 @@ const IconButton = forwardRef<HTMLSpanElement, IconButtonProps>(
   }
 );
 
-IconButton.displayName = "IconButton";
-
 export default IconButton;

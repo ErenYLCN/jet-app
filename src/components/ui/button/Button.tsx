@@ -18,7 +18,6 @@ export default function Button({
   left,
   right,
   customClassName,
-  className,
   ref,
   variant = "primary",
   size = "md",
@@ -36,8 +35,7 @@ export default function Button({
         styles[variant],
         styles[size],
         loading && styles.loading,
-        customClassName,
-        className
+        customClassName
       )}
       disabled={isDisabled}
       aria-disabled={isDisabled}

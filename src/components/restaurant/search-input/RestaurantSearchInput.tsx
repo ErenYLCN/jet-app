@@ -12,12 +12,15 @@ interface RestaurantSearchInputProps {
   onChange: (value: string) => void;
   onSearch: (value: string) => void;
   placeholder?: string;
+  customClassName?: string;
 }
 
 function RestaurantSearchInput({
   value,
   onChange,
   onSearch,
+  placeholder,
+  customClassName,
 }: RestaurantSearchInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -45,35 +48,34 @@ function RestaurantSearchInput({
   };
 
   return (
-    <div className={styles.searchContainer}>
-      <Input
-        ref={inputRef}
-        placeholder={"Search for restaurants or cuisines..."}
-        value={value}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-        leftIcon={<img src={SearchIcon} alt="Search" />}
-        rightActions={
-          <div className={styles.rightActions}>
-            {value && (
-              <>
-                <IconButton
-                  description="Clear search"
-                  size="sm"
-                  onClick={clearSearch}
-                  className={styles.clearButton}
-                >
-                  <img src={CloseIcon} />
-                </IconButton>
-                <Button onClick={handleSearch} variant="primary" size="lg">
-                  Search
-                </Button>
-              </>
-            )}
-          </div>
-        }
-      />
-    </div>
+    <Input
+      customClassName={customClassName}
+      ref={inputRef}
+      placeholder={placeholder || "Search for restaurants or cuisines..."}
+      value={value}
+      onChange={handleChange}
+      onKeyDown={handleKeyDown}
+      leftIcon={<img src={SearchIcon} alt="Search" />}
+      rightActions={
+        <div className={styles.rightActions}>
+          {value && (
+            <>
+              <IconButton
+                description="Clear search"
+                size="sm"
+                onClick={clearSearch}
+                customClassName={styles.clearButton}
+              >
+                <img src={CloseIcon} />
+              </IconButton>
+              <Button onClick={handleSearch} variant="primary" size="lg">
+                Search
+              </Button>
+            </>
+          )}
+        </div>
+      }
+    />
   );
 }
 

@@ -11,6 +11,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   rightActions?: ReactNode;
   label?: string;
   ref?: RefObject<HTMLInputElement | null>;
+  customClassName?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -19,13 +20,16 @@ const Input: React.FC<InputProps> = ({
   label,
   id,
   ref,
-  className,
+  customClassName,
   ...props
 }) => {
   const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
 
   return (
-    <label htmlFor={inputId} className={cn(styles.inputWrapper, className)}>
+    <label
+      htmlFor={inputId}
+      className={cn(styles.inputWrapper, customClassName)}
+    >
       {leftIcon && <span className={styles.icon}>{leftIcon}</span>}
       <input
         ref={ref}
