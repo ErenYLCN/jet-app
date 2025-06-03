@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../../store/hooks";
 import Modal from "../../ui/modal/Modal";
-import IconButton from "../../ui/icon-button/IconButton";
+import IconButton from "../../ui/icon-button/button/IconButton";
 
 import styles from "./UserModal.module.css";
 
@@ -21,14 +21,8 @@ function UserModal({ isOpen, onClose }: UserModalProps) {
             onClick={onClose}
             description="Close modal"
             className={styles.closeButton}
-          >
-            <img
-              src="/src/assets/close.svg"
-              alt="Close"
-              width={24}
-              height={24}
-            />
-          </IconButton>
+            icon="close"
+          />
         </div>
         <div className={styles.content}>
           <div className={styles.field}>

@@ -1,5 +1,5 @@
 import Modal from "../../ui/modal/Modal";
-import IconButton from "../../ui/icon-button/IconButton";
+import IconButton from "../../ui/icon-button/button/IconButton";
 import type { Restaurant } from "../../../models/Restaurant.model";
 import styles from "./RestaurantDetailModal.module.css";
 
@@ -23,17 +23,10 @@ function RestaurantDetailModal({
           <h2 className={styles.title}>{restaurant.name || "Restaurant"}</h2>
           <IconButton
             onClick={onClose}
-            size="sm"
             description="Close modal"
             className={styles.closeButton}
-          >
-            <img
-              src="/src/assets/close.svg"
-              alt="Close"
-              width={24}
-              height={24}
-            />
-          </IconButton>
+            icon="close"
+          />
         </div>
 
         <div className={styles.header}>

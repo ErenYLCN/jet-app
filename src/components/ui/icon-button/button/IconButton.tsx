@@ -1,10 +1,12 @@
 import { forwardRef } from "react";
-import cn from "../../../utils/class-names/classNames";
+import cn from "../../../../utils/class-names/classNames";
+import Icon, { type IconName } from "../Icon";
 import styles from "./IconButton.module.css";
 
 interface IconButtonProps {
   description: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  icon?: IconName;
   className?: string;
   onClick?: (event: React.MouseEvent<HTMLSpanElement>) => void;
   onKeyDown?: (event: React.KeyboardEvent<HTMLSpanElement>) => void;
@@ -17,6 +19,7 @@ const IconButton = forwardRef<HTMLSpanElement, IconButtonProps>(
     {
       description,
       children,
+      icon,
       className,
       onClick,
       onKeyDown,
@@ -57,7 +60,7 @@ const IconButton = forwardRef<HTMLSpanElement, IconButtonProps>(
         onKeyDown={handleKeyDown}
         {...props}
       >
-        {children}
+        {icon ? <Icon name={icon} alt={description} /> : children}
       </span>
     );
   }

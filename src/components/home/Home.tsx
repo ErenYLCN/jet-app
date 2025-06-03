@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchRestaurantsStart } from "../../store/slices/restaurantsSlice";
 import Page from "../page/Page";
-import IconButton from "../ui/icon-button/IconButton";
+import IconButton from "../ui/icon-button/button/IconButton";
+import Icon from "../ui/icon-button/Icon";
 import RestaurantSearchInput from "../restaurant/search-input/RestaurantSearchInput";
 import RestaurantList from "../restaurant/list/RestaurantList";
 import Spinner from "../ui/spinner/Spinner";
@@ -88,12 +89,7 @@ function Home() {
           size="lg"
           description="Open user menu"
         >
-          <img
-            src="/src/assets/hamburger.svg"
-            alt="Menu"
-            width={24}
-            height={24}
-          />
+          <Icon name="hamburger" alt="Menu" width={24} height={24} />
         </IconButton>
       }
     >
