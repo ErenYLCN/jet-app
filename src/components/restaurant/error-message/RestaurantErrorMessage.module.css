@@ -1,0 +1,15 @@
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 48px 24px;
+  gap: 16px;
+}
+
+.errorMessage {
+  text-align: center;
+  font-size: var(--font-size-lg);
+  color: var(--error-color);
+  margin: 0;
+}

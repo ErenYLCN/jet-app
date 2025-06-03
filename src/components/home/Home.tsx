@@ -7,6 +7,7 @@ import RestaurantSearchInput from "../restaurant/search-input/RestaurantSearchIn
 import RestaurantList from "../restaurant/list/RestaurantList";
 import Spinner from "../ui/spinner/Spinner";
 import RestaurantDetailModal from "../restaurant/detail-modal/RestaurantDetailModal";
+import RestaurantErrorMessage from "../restaurant/error-message/RestaurantErrorMessage";
 import { useRestaurantListState } from "../../hooks/useRestaurantListState";
 import useModalState from "../../hooks/useModalState";
 import type { Restaurant } from "../../models/Restaurant.model";
@@ -14,7 +15,9 @@ import type { Restaurant } from "../../models/Restaurant.model";
 import styles from "./Home.module.css";
 
 function Home() {
-  const { restaurants, loading } = useAppSelector((state) => state.restaurants);
+  const { restaurants, loading, error } = useAppSelector(
+    (state) => state.restaurants
+  );
   const dispatch = useAppDispatch();
   const { searchQuery, page, setSearchQuery, setPage } =
     useRestaurantListState();
@@ -104,7 +107,11 @@ function Home() {
           </div>
         )}
 
-        {!loading && filteredRestaurants.length > 0 && (
+        {error && (
+          <RestaurantErrorMessage error={error} onRetry={handleRefresh} />
+        )}
+
+        {!loading && !error && filteredRestaurants.length > 0 && (
           <RestaurantList
             filteredRestaurants={filteredRestaurants}
             currentPage={page}
@@ -114,6 +121,7 @@ function Home() {
         )}
 
         {!loading &&
+          !error &&
           restaurants.length > 0 &&
           filteredRestaurants.length === 0 && (
             <p className={styles.emptyMessage}>
@@ -121,7 +129,7 @@ function Home() {
             </p>
           )}
 
-        {!loading && restaurants.length === 0 && (
+        {!loading && !error && restaurants.length === 0 && (
           <p className={styles.emptyMessage}>
             No restaurants found for this postcode.
           </p>
