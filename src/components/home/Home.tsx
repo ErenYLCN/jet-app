@@ -9,8 +9,8 @@ import Spinner from "../ui/spinner/Spinner";
 import RestaurantDetailModal from "../restaurant/detail-modal/RestaurantDetailModal";
 import RestaurantErrorMessage from "../restaurant/error-message/RestaurantErrorMessage";
 import UserModal from "../user/modal/UserModal";
-import { useRestaurantListState } from "../../hooks/useRestaurantListState";
-import useModalState from "../../hooks/useModalState";
+import { useRestaurantListState } from "../../hooks/restaurant-list-state/useRestaurantListState";
+import useModalState from "../../hooks/modal-state/useModalState";
 import type { Restaurant } from "../../models/Restaurant.model";
 
 import styles from "./Home.module.css";
