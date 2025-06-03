@@ -4,7 +4,7 @@
  * @returns {string} A string of space-separated class names.
  */
 function cn(
-  ...args: (string | boolean | undefined | Record<string, unknown>)[]
+  ...args: (string | boolean | undefined | null | Record<string, unknown>)[]
 ): string {
   const classes: string[] = [];
 

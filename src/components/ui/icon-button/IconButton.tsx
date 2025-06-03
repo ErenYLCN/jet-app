@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import cn from "../../../utils/classNames";
+import cn from "../../../utils/class-names/classNames";
 import styles from "./IconButton.module.css";
 
 interface IconButtonProps {

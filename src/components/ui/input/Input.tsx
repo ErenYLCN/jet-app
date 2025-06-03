@@ -3,7 +3,7 @@ import React, {
   type ReactNode,
   type RefObject,
 } from "react";
-import cn from "../../../utils/classNames";
+import cn from "../../../utils/class-names/classNames";
 import styles from "./Input.module.css";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {

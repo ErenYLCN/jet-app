@@ -1,4 +1,4 @@
-import cn from "../../../utils/classNames";
+import cn from "../../../utils/class-names/classNames";
 import styles from "./Button.module.css";
 import Spinner from "../spinner/Spinner";
 
