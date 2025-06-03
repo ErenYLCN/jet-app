@@ -6,11 +6,11 @@ import React, {
 import cn from "../../../utils/class-names/classNames";
 import styles from "./Input.module.css";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   leftIcon?: ReactNode;
   rightActions?: ReactNode;
   label?: string;
-  ref: RefObject<HTMLInputElement | null>;
+  ref?: RefObject<HTMLInputElement | null>;
 }
 
 const Input: React.FC<InputProps> = ({

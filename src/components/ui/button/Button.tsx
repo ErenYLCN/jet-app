@@ -2,11 +2,12 @@ import cn from "../../../utils/class-names/classNames";
 import styles from "./Button.module.css";
 import Spinner from "../spinner/Spinner";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   left?: React.ReactNode;
   right?: React.ReactNode;
   customClassName?: string;
-  ref?: React.Ref<HTMLButtonElement>;
+  ref?: React.Ref<HTMLButtonElement | null>;
   variant?: "primary" | "secondary";
   size?: "sm" | "md" | "lg";
   loading?: boolean;
