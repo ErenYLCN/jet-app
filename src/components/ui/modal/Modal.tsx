@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import IconButton from "../icon-button/button/IconButton";
-import closeIcon from "../../../assets/svg/close.svg";
 import styles from "./Modal.module.css";
 
 interface ModalProps {
@@ -97,10 +96,9 @@ function Modal({ isOpen, onClose, children, title }: ModalProps) {
             <IconButton
               description="Close modal"
               onClick={onClose}
-              className={styles.closeButton}
-            >
-              <img src={closeIcon} alt="" />
-            </IconButton>
+              customClassName={styles.closeButton}
+              icon="close"
+            ></IconButton>
           </div>
         )}
         <div className={styles.content}>{children}</div>

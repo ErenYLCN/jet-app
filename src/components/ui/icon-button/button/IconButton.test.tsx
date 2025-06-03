@@ -11,6 +11,34 @@ jest.mock("./IconButton.module.css", () => ({
   lg: "lg",
 }));
 
+// Mock Icon component
+jest.mock("../Icon", () => {
+  return function MockIcon({
+    name,
+    alt,
+    width = 24,
+    height = 24,
+    customClassName,
+  }: {
+    name: string;
+    alt?: string;
+    width?: number;
+    height?: number;
+    customClassName?: string;
+  }) {
+    return (
+      <img
+        src={`mock-${name}-icon.svg`}
+        alt={alt}
+        width={width}
+        height={height}
+        className={customClassName}
+        data-testid={`icon-${name}`}
+      />
+    );
+  };
+});
+
 describe("IconButton Component", () => {
   test("renders correctly with default props", () => {
     render(

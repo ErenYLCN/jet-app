@@ -7,7 +7,7 @@ interface IconButtonProps {
   description: string;
   children?: React.ReactNode;
   icon?: IconName;
-  className?: string;
+  customClassName?: string;
   onClick?: (event: React.MouseEvent<HTMLSpanElement>) => void;
   onKeyDown?: (event: React.KeyboardEvent<HTMLSpanElement>) => void;
   size?: "sm" | "md" | "lg";
@@ -20,7 +20,7 @@ const IconButton = forwardRef<HTMLSpanElement, IconButtonProps>(
       description,
       children,
       icon,
-      className,
+      customClassName,
       onClick,
       onKeyDown,
       size = "md",
@@ -55,7 +55,7 @@ const IconButton = forwardRef<HTMLSpanElement, IconButtonProps>(
         tabIndex={disabled ? -1 : 0}
         aria-label={description}
         aria-disabled={disabled}
-        className={cn(styles.iconButton, styles[size], className)}
+        className={cn(styles.iconButton, styles[size], customClassName)}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         {...props}

@@ -13,6 +13,32 @@ jest.mock("./Modal.module.css", () => ({
   content: "content",
 }));
 
+// Mock IconButton component
+jest.mock("../icon-button/button/IconButton", () => {
+  return function MockIconButton({
+    description,
+    onClick,
+    customClassName,
+    icon,
+  }: {
+    description: string;
+    onClick: () => void;
+    customClassName?: string;
+    icon: string;
+  }) {
+    return (
+      <button
+        onClick={onClick}
+        className={customClassName}
+        aria-label={description}
+        data-icon={icon}
+      >
+        {description}
+      </button>
+    );
+  };
+});
+
 // Mock createPortal to render in the same container for testing
 jest.mock("react-dom", () => ({
   ...jest.requireActual("react-dom"),

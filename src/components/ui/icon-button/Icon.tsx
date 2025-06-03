@@ -15,7 +15,7 @@ interface IconProps {
   alt?: string;
   width?: number;
   height?: number;
-  className?: string;
+  customClassName?: string;
 }
 
 function Icon({
@@ -23,7 +23,7 @@ function Icon({
   alt = "",
   width = 24,
   height = 24,
-  className,
+  customClassName,
 }: IconProps) {
   const iconSrc = iconMap[name];
 
@@ -33,7 +33,7 @@ function Icon({
       alt={alt}
       width={width}
       height={height}
-      className={className}
+      className={customClassName}
     />
   );
 }

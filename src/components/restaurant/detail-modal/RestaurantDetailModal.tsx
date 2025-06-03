@@ -24,7 +24,7 @@ function RestaurantDetailModal({
           <IconButton
             onClick={onClose}
             description="Close modal"
-            className={styles.closeButton}
+            customClassName={styles.closeButton}
             icon="close"
           />
         </div>

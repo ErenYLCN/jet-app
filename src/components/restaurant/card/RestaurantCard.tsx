@@ -25,11 +25,11 @@ export default function RestaurantCard({
   const formatDeliveryFee = () => {
     return restaurant.deliveryCost === 0
       ? "Free delivery"
-      : `€${restaurant.deliveryCost.toFixed(2)} Delivery`;
+      : `€${restaurant.deliveryCost?.toFixed(2)} Delivery`;
   };
 
   const formatCuisines = () => {
-    return restaurant.cuisines.map((cuisine) => cuisine.name).join(", ");
+    return restaurant.cuisines?.map((cuisine) => cuisine.name).join(", ") || "";
   };
 
   return (
@@ -59,13 +59,15 @@ export default function RestaurantCard({
           <div className={styles.rating}>
             <span className={styles.starIcon}>★</span>
             <span className={styles.ratingValue}>
-              {restaurant.rating.starRating.toFixed(1)}
+              {restaurant.rating?.starRating?.toFixed(1)}
             </span>
             <span className={styles.ratingCount}>
-              ({restaurant.rating.count}+)
+              ({restaurant.rating?.count}+)
             </span>
           </div>
-          <span className={styles.cuisines}>{formatCuisines()}</span>
+          {restaurant.cuisines && (
+            <span className={styles.cuisines}>{formatCuisines()}</span>
+          )}
         </div>
 
         <div className={styles.details}>
