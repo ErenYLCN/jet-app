@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchRestaurantsStart } from "../../store/slices/restaurantsSlice";
 import Page from "../page/Page";
-import Button from "../ui/button/Button";
+import IconButton from "../ui/icon-button/IconButton";
 import RestaurantSearchInput from "../restaurant/search-input/RestaurantSearchInput";
 import RestaurantList from "../restaurant/list/RestaurantList";
 import Spinner from "../ui/spinner/Spinner";
 import RestaurantDetailModal from "../restaurant/detail-modal/RestaurantDetailModal";
 import RestaurantErrorMessage from "../restaurant/error-message/RestaurantErrorMessage";
+import UserModal from "../user/modal/UserModal";
 import { useRestaurantListState } from "../../hooks/useRestaurantListState";
 import useModalState from "../../hooks/useModalState";
 import type { Restaurant } from "../../models/Restaurant.model";
@@ -25,9 +26,14 @@ function Home() {
   const [selectedRestaurant, setSelectedRestaurant] =
     useState<Restaurant | null>(null);
   const {
-    isOpen: isModalOpen,
-    open: openModal,
-    close: closeModal,
+    isOpen: isRestaurantDetailModalOpen,
+    open: openRestaurantDetailModal,
+    close: closeRestaurantDetailModal,
+  } = useModalState();
+  const {
+    isOpen: isUserModalOpen,
+    open: openUserModal,
+    close: closeUserModal,
   } = useModalState();
 
   useEffect(() => {
@@ -59,7 +65,7 @@ function Home() {
 
   const handleRestaurantClick = (restaurant: Restaurant) => {
     setSelectedRestaurant(restaurant);
-    openModal();
+    openRestaurantDetailModal();
   };
 
   // Filter restaurants based on search query
@@ -77,9 +83,18 @@ function Home() {
     <Page
       title="Restaurants Near You"
       headerActions={
-        <Button onClick={handleRefresh} variant="secondary" size="sm">
-          Refresh
-        </Button>
+        <IconButton
+          onClick={openUserModal}
+          size="lg"
+          description="Open user menu"
+        >
+          <img
+            src="/src/assets/hamburger.svg"
+            alt="Menu"
+            width={24}
+            height={24}
+          />
+        </IconButton>
       }
     >
       <div className={styles.content}>
@@ -137,10 +152,12 @@ function Home() {
       </div>
 
       <RestaurantDetailModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
+        isOpen={isRestaurantDetailModalOpen}
+        onClose={closeRestaurantDetailModal}
         restaurant={selectedRestaurant}
       />
+
+      <UserModal isOpen={isUserModalOpen} onClose={closeUserModal} />
     </Page>
   );
 }

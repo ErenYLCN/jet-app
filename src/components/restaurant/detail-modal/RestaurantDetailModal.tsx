@@ -1,4 +1,5 @@
 import Modal from "../../ui/modal/Modal";
+import IconButton from "../../ui/icon-button/IconButton";
 import type { Restaurant } from "../../../models/Restaurant.model";
 import styles from "./RestaurantDetailModal.module.css";
 
@@ -16,8 +17,25 @@ function RestaurantDetailModal({
   if (!restaurant) return null;
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title={restaurant.name}>
+    <Modal isOpen={isOpen} onClose={onClose}>
       <div className={styles.container}>
+        <div className={styles.modalHeader}>
+          <h2 className={styles.title}>{restaurant.name}</h2>
+          <IconButton
+            onClick={onClose}
+            size="sm"
+            description="Close modal"
+            className={styles.closeButton}
+          >
+            <img
+              src="/src/assets/close.svg"
+              alt="Close"
+              width={24}
+              height={24}
+            />
+          </IconButton>
+        </div>
+
         <div className={styles.header}>
           <img
             src={restaurant.logoUrl}

@@ -63,7 +63,7 @@ function RestaurantSearchInput({
                   onClick={clearSearch}
                   className={styles.clearButton}
                 >
-                  <img src={CloseIcon} alt="" />
+                  <img src={CloseIcon} />
                 </IconButton>
                 <Button onClick={handleSearch} variant="primary" size="lg">
                   Search
