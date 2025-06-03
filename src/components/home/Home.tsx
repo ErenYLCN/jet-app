@@ -72,8 +72,8 @@ function Home() {
   const filteredRestaurants = searchQuery
     ? restaurants.filter(
         (restaurant) =>
-          restaurant.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          restaurant.cuisines.some((cuisine) =>
+          restaurant.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          restaurant.cuisines?.some((cuisine) =>
             cuisine.name.toLowerCase().includes(searchQuery.toLowerCase())
           )
       )
