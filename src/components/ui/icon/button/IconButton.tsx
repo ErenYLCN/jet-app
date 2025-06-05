@@ -11,6 +11,7 @@ interface IconButtonProps {
   onClick?: (event: React.MouseEvent<HTMLSpanElement>) => void;
   onKeyDown?: (event: React.KeyboardEvent<HTMLSpanElement>) => void;
   size?: "sm" | "md" | "lg";
+  variant?: "standart" | "logo";
   disabled?: boolean;
 }
 
@@ -25,6 +26,7 @@ const IconButton = forwardRef<HTMLSpanElement, IconButtonProps>(
       onKeyDown,
       size = "md",
       disabled = false,
+      variant = "standart",
       ...props
     },
     ref
@@ -55,12 +57,26 @@ const IconButton = forwardRef<HTMLSpanElement, IconButtonProps>(
         tabIndex={disabled ? -1 : 0}
         aria-label={description}
         aria-disabled={disabled}
-        className={cn(styles.iconButton, styles[size], customClassName)}
+        className={cn(
+          styles.iconButton,
+          styles[size],
+          customClassName,
+          styles[variant]
+        )}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         {...props}
       >
-        {icon ? <Icon name={icon} alt={description} /> : children}
+        {icon ? (
+          <Icon
+            name={icon}
+            alt={description}
+            width={variant === "logo" ? 160 : undefined}
+            height={variant === "logo" ? 60 : undefined}
+          />
+        ) : (
+          children
+        )}
       </span>
     );
   }

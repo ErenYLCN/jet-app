@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store.ts";
 import { createBrowserRouter, RouterProvider } from "react-router";
 
-import Home from "./components/home/Home.tsx";
+import HomePage from "./components/page/home/HomePage.tsx";
 
 import "./styles/_global.css";
 import "./styles/_variables.css";
@@ -13,7 +13,7 @@ import "./styles/_mixins.css";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <HomePage />,
   },
 ]);
 

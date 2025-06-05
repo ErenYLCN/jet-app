@@ -1,5 +1,5 @@
 import Modal from "../../ui/modal/Modal";
-import IconButton from "../../ui/icon-button/button/IconButton";
+import IconButton from "../../ui/icon/button/IconButton";
 import RestaurantMapView from "../map-view/RestaurantMapView";
 import type { Restaurant } from "../../../features/restaurants/types/Restaurant";
 import styles from "./RestaurantDetailModal.module.css";

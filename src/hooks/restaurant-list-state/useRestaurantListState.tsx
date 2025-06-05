@@ -73,6 +73,7 @@ export const useRestaurantListState = (): RestaurantListState &
       newParams.delete("q");
     }
     newParams.set("page", "1");
+    newParams.delete("sort");
     setSearchParams(newParams);
   };
 

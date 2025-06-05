@@ -8,13 +8,13 @@
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.iconButton:hover {
+.iconButton:not(.logo):hover {
   background-color: var(--secondary-color);
   color: var(--text-color);
 }
 
-.iconButton:focus {
-  outline: none;
+.iconButton:not(.logo):focus {
+  outline: var(--outline);
   background-color: var(--secondary-color);
 }
 
@@ -45,4 +45,9 @@
 .lg {
   width: 48px;
   height: 48px;
+}
+
+.logo {
+  width: 160px;
+  height: 60px;
 }

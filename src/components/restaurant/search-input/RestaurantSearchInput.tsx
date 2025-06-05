@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import Input from "../../ui/input/Input";
-import IconButton from "../../ui/icon-button/button/IconButton";
+import IconButton from "../../ui/icon/button/IconButton";
 import Button from "../../ui/button/Button";
 import SearchIcon from "../../../assets/svg/search.svg";
 import CloseIcon from "../../../assets/svg/close.svg";

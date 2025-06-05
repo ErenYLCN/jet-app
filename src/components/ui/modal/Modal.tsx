@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import IconButton from "../icon-button/button/IconButton";
+import IconButton from "../icon/button/IconButton";
 import styles from "./Modal.module.css";
 
 interface ModalProps {

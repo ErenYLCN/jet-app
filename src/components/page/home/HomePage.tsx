@@ -1,29 +1,37 @@
 import { useEffect, useState, useMemo } from "react";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { fetchRestaurantsStart } from "../../store/slices/restaurantsSlice";
-import Page from "../page/Page";
-import IconButton from "../ui/icon-button/button/IconButton";
-import Icon from "../ui/icon-button/Icon";
-import RestaurantSearchInput from "../restaurant/search-input/RestaurantSearchInput";
-import RestaurantList from "../restaurant/list/RestaurantList";
-import Spinner from "../ui/spinner/Spinner";
-import RestaurantDetailModal from "../restaurant/detail-modal/RestaurantDetailModal";
-import RestaurantErrorMessage from "../restaurant/error-message/RestaurantErrorMessage";
-import UserModal from "../user/modal/UserModal";
-import Select from "../ui/select/Select";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { fetchRestaurantsStart } from "../../../store/slices/restaurantsSlice";
+import Page from "../Page";
+import IconButton from "../../ui/icon/button/IconButton";
+import Icon from "../../ui/icon/Icon";
+import RestaurantSearchInput from "../../restaurant/search-input/RestaurantSearchInput";
+import RestaurantList from "../../restaurant/list/RestaurantList";
+import Spinner from "../../ui/spinner/Spinner";
+import RestaurantDetailModal from "../../restaurant/detail-modal/RestaurantDetailModal";
+import RestaurantErrorMessage from "../../restaurant/error-message/RestaurantErrorMessage";
+import UserModal from "../../user/modal/UserModal";
+import Select from "../../ui/select/Select";
 import {
   useRestaurantListState,
   type SortOption,
-} from "../../hooks/restaurant-list-state/useRestaurantListState";
-import useModalState from "../../hooks/modal-state/useModalState";
-import type { Restaurant } from "../../features/restaurants/types/Restaurant";
-import { processRestaurants } from "../../features/restaurants/utils/restaurantUtils";
-import { FilterBySearchQuery } from "../../features/restaurants/strategies/filter/RestaurantFilterStrategy";
-import { RestaurantSortStrategyRegistry } from "../../features/restaurants/strategies/sort/RestaurantSortStrategy";
+} from "../../../hooks/restaurant-list-state/useRestaurantListState";
+import useModalState from "../../../hooks/modal-state/useModalState";
+import type { Restaurant } from "../../../features/restaurants/types/Restaurant";
+import { processRestaurants } from "../../../features/restaurants/utils/restaurantUtils";
+import { FilterBySearchQuery } from "../../../features/restaurants/strategies/filter/RestaurantFilterStrategy";
+import { RestaurantSortStrategyRegistry } from "../../../features/restaurants/strategies/sort/RestaurantSortStrategy";
 
-import styles from "./Home.module.css";
+import styles from "./HomePage.module.css";
 
-function Home() {
+const SORT_SELECT_OPTIONS: Array<{ value: SortOption; label: string }> = [
+  { value: "bestMatch", label: "Best Match" },
+  { value: "reviews", label: "Rating (High to Low)" },
+  { value: "estimatedDeliveryTime", label: "Delivery Time" },
+  { value: "minOrderAmount", label: "Min Order Amount" },
+  { value: "deliveryCost", label: "Delivery Cost" },
+];
+
+function HomePage() {
   const { restaurants, loading, error } = useAppSelector(
     (state) => state.restaurants
   );
@@ -125,13 +133,7 @@ function Home() {
 
             <Select
               label="Sort by"
-              options={[
-                { value: "bestMatch", label: "Best Match" },
-                { value: "reviews", label: "Rating (High to Low)" },
-                { value: "estimatedDeliveryTime", label: "Delivery Time" },
-                { value: "minOrderAmount", label: "Min Order Amount" },
-                { value: "deliveryCost", label: "Delivery Cost" },
-              ]}
+              options={SORT_SELECT_OPTIONS}
               value={sort}
               onChange={(e) => setSort(e.target.value as SortOption)}
               customClassName={styles.sortSelect}
@@ -185,4 +187,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomePage;

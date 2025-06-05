@@ -2,12 +2,14 @@ import hamburgerIcon from "../../../assets/svg/hamburger.svg";
 import closeIcon from "../../../assets/svg/close.svg";
 import searchIcon from "../../../assets/svg/search.svg";
 import caretDownIcon from "../../../assets/svg/caret-down.svg";
+import erenbezorgdIcon from "../../../assets/svg/erenbezorgd.svg";
 
 const iconMap = {
   hamburger: hamburgerIcon,
   close: closeIcon,
   search: searchIcon,
   "caret-down": caretDownIcon,
+  erenbezorgd: erenbezorgdIcon,
 } as const;
 
 export type IconName = keyof typeof iconMap;

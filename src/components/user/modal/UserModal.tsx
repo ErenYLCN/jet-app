@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../../store/hooks";
 import Modal from "../../ui/modal/Modal";
-import IconButton from "../../ui/icon-button/button/IconButton";
+import IconButton from "../../ui/icon/button/IconButton";
 
 import styles from "./UserModal.module.css";
 
