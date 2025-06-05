@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { Restaurant } from "../models/Restaurant.model";
+import type { Restaurant } from "../features/restaurants/types/Restaurant";
 
 export interface RestaurantsApiResponse {
   restaurants: Restaurant[];
@@ -15,8 +15,12 @@ const jetApi = axios.create({
   },
 });
 
-export const getRestaurantsByPostcode = async (postcode: string): Promise<RestaurantsApiResponse> => {
-  const response = await jetApi.get(`/discovery/uk/restaurants/enriched/bypostcode/${postcode}`);
+export const getRestaurantsByPostcode = async (
+  postcode: string
+): Promise<RestaurantsApiResponse> => {
+  const response = await jetApi.get(
+    `/discovery/uk/restaurants/enriched/bypostcode/${postcode}`
+  );
   return response.data;
 };
 

@@ -1,4 +1,4 @@
-import { type Restaurant } from "../../../models/Restaurant.model";
+import { type Restaurant } from "../../../features/restaurants/types/Restaurant";
 import cn from "../../../utils/class-names/classNames";
 import styles from "./RestaurantCard.module.css";
 
@@ -30,6 +30,12 @@ export default function RestaurantCard({
 
   const formatCuisines = () => {
     return restaurant.cuisines?.map((cuisine) => cuisine.name).join(", ") || "";
+  };
+
+  const formatMinOrder = () => {
+    return restaurant.minimumDeliveryValue === 0
+      ? "No min. order"
+      : `€${restaurant.minimumDeliveryValue?.toFixed(2)} min`;
   };
 
   return (
@@ -86,6 +92,9 @@ export default function RestaurantCard({
             >
               🚴 {formatDeliveryFee()}
             </span>
+          )}
+          {restaurant.minimumDeliveryValue !== null && (
+            <span className={styles.minOrder}>💰 {formatMinOrder()}</span>
           )}
         </div>
       </div>

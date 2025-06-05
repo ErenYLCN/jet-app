@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
-import type { Restaurant } from "../../../models/Restaurant.model";
-import { getGoogleMapsApiKey } from "../../../utils/env";
+import type { Restaurant } from "../../../features/restaurants/types/Restaurant";
+import { getGoogleMapsApiKey } from "../../../utils/env/env";
 import styles from "./RestaurantMapView.module.css";
 
 interface RestaurantMapViewProps {

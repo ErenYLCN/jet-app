@@ -56,4 +56,8 @@
   .sortSelect {
     min-width: unset;
   }
+
+  .searchInput {
+    flex: unset;
+  }
 }

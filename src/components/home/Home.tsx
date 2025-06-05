@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchRestaurantsStart } from "../../store/slices/restaurantsSlice";
 import Page from "../page/Page";
@@ -11,9 +11,15 @@ import RestaurantDetailModal from "../restaurant/detail-modal/RestaurantDetailMo
 import RestaurantErrorMessage from "../restaurant/error-message/RestaurantErrorMessage";
 import UserModal from "../user/modal/UserModal";
 import Select from "../ui/select/Select";
-import { useRestaurantListState } from "../../hooks/restaurant-list-state/useRestaurantListState";
+import {
+  useRestaurantListState,
+  type SortOption,
+} from "../../hooks/restaurant-list-state/useRestaurantListState";
 import useModalState from "../../hooks/modal-state/useModalState";
-import type { Restaurant } from "../../models/Restaurant.model";
+import type { Restaurant } from "../../features/restaurants/types/Restaurant";
+import { processRestaurants } from "../../features/restaurants/utils/restaurantUtils";
+import { FilterBySearchQuery } from "../../features/restaurants/strategies/filter/RestaurantFilterStrategy";
+import { RestaurantSortStrategyRegistry } from "../../features/restaurants/strategies/sort/RestaurantSortStrategy";
 
 import styles from "./Home.module.css";
 
@@ -22,12 +28,11 @@ function Home() {
     (state) => state.restaurants
   );
   const dispatch = useAppDispatch();
-  const { searchQuery, page, setSearchQuery, setPage } =
+  const { searchQuery, page, sort, setSearchQuery, setPage, setSort } =
     useRestaurantListState();
   const [inputValue, setInputValue] = useState(searchQuery || "");
   const [selectedRestaurant, setSelectedRestaurant] =
     useState<Restaurant | null>(null);
-  const [sortOption, setSortOption] = useState("name");
   const {
     isOpen: isRestaurantDetailModalOpen,
     open: openRestaurantDetailModal,
@@ -48,7 +53,11 @@ function Home() {
   };
 
   const handleSearch = (value: string) => {
-    setSearchQuery(value);
+    if (value.trim() === "") {
+      return;
+    }
+
+    setSearchQuery(value.trim());
   };
 
   const handlePageChange = (pageNumber: number) => {
@@ -71,16 +80,19 @@ function Home() {
     openRestaurantDetailModal();
   };
 
-  // Filter restaurants based on search query
-  const filteredRestaurants = searchQuery
-    ? restaurants.filter(
-        (restaurant) =>
-          restaurant.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          restaurant.cuisines?.some((cuisine) =>
-            cuisine.name.toLowerCase().includes(searchQuery.toLowerCase())
-          )
-      )
-    : restaurants;
+  const sortRegistry = useMemo(() => new RestaurantSortStrategyRegistry(), []);
+  const filterStrategies = useMemo(
+    () => [new FilterBySearchQuery(searchQuery)],
+    [searchQuery]
+  );
+  const sortStrategy = useMemo(
+    () => sortRegistry.getStrategy(sort),
+    [sortRegistry, sort]
+  );
+  const filteredAndSortedRestaurants = useMemo(
+    () => processRestaurants(restaurants, filterStrategies, sortStrategy),
+    [restaurants, filterStrategies, sortStrategy]
+  );
 
   return (
     <Page
@@ -114,13 +126,14 @@ function Home() {
             <Select
               label="Sort by"
               options={[
-                { value: "name", label: "Name (A-Z)" },
-                { value: "rating", label: "Rating (High to Low)" },
-                { value: "deliveryTime", label: "Delivery Time" },
+                { value: "bestMatch", label: "Best Match" },
+                { value: "reviews", label: "Rating (High to Low)" },
+                { value: "estimatedDeliveryTime", label: "Delivery Time" },
+                { value: "minOrderAmount", label: "Min Order Amount" },
                 { value: "deliveryCost", label: "Delivery Cost" },
               ]}
-              value={sortOption}
-              onChange={(e) => setSortOption(e.target.value)}
+              value={sort}
+              onChange={(e) => setSort(e.target.value as SortOption)}
               customClassName={styles.sortSelect}
             />
           </div>
@@ -136,9 +149,9 @@ function Home() {
           <RestaurantErrorMessage error={error} onRetry={handleRefresh} />
         )}
 
-        {!loading && !error && filteredRestaurants.length > 0 && (
+        {!loading && !error && filteredAndSortedRestaurants.length > 0 && (
           <RestaurantList
-            filteredRestaurants={filteredRestaurants}
+            filteredRestaurants={filteredAndSortedRestaurants}
             currentPage={page}
             onPageChange={handlePageChange}
             onRestaurantClick={handleRestaurantClick}
@@ -148,7 +161,7 @@ function Home() {
         {!loading &&
           !error &&
           restaurants.length > 0 &&
-          filteredRestaurants.length === 0 && (
+          filteredAndSortedRestaurants.length === 0 && (
             <p className={styles.emptyMessage}>
               No restaurants match your search for "{searchQuery}".
             </p>

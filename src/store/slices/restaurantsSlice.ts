@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { Restaurant } from "../../models/Restaurant.model";
+import type { Restaurant } from "../../features/restaurants/types/Restaurant";
 
 interface RestaurantsState {
   restaurants: Restaurant[];
@@ -32,6 +32,10 @@ const restaurantsSlice = createSlice({
   },
 });
 
-export const { fetchRestaurantsStart, fetchRestaurantsSuccess, fetchRestaurantsFailure } = restaurantsSlice.actions;
+export const {
+  fetchRestaurantsStart,
+  fetchRestaurantsSuccess,
+  fetchRestaurantsFailure,
+} = restaurantsSlice.actions;
 
 export default restaurantsSlice.reducer;

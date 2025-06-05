@@ -3,19 +3,8 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import RestaurantMapView from "./RestaurantMapView";
-import type { Restaurant } from "../../../models/Restaurant.model";
+import type { Restaurant } from "../../../features/restaurants/types/Restaurant";
 import { useJsApiLoader } from "@react-google-maps/api";
-
-// Mock import.meta for Jest environment
-Object.defineProperty(globalThis, "import", {
-  value: {
-    meta: {
-      env: {
-        VITE_GOOGLE_MAPS_API_KEY: "test-api-key",
-      },
-    },
-  },
-});
 
 // Mock Google Maps global object
 const mockGoogle = {
@@ -41,7 +30,7 @@ if (typeof window !== "undefined") {
 }
 
 // Mock the env utility function
-jest.mock("../../../utils/env", () => ({
+jest.mock("../../../utils/env/env", () => ({
   getGoogleMapsApiKey: jest.fn(() => "test-api-key"),
 }));
 

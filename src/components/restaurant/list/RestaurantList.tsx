@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import RestaurantCard from "../card/RestaurantCard";
 import Pagination from "../../ui/pagination/Pagination";
-import type { Restaurant } from "../../../models/Restaurant.model";
+import type { Restaurant } from "../../../features/restaurants/types/Restaurant";
 
 import styles from "./RestaurantList.module.css";
 

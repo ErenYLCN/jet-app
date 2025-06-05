@@ -21,4 +21,5 @@ export interface Restaurant {
   };
   deliveryCost?: number;
   logoUrl?: string;
+  minimumDeliveryValue?: number;
 }
