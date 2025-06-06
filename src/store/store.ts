@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import restaurantsReducer from "./slices/restaurantsSlice";
-import userReducer from "./slices/userSlice";
+import restaurantsReducer from "./slices/restaurant/restaurantsSlice";
+import userReducer from "./slices/user/userSlice";
 import createSagaMiddleware from "redux-saga";
 import { rootSaga } from "./sagas/rootSaga";
 
@@ -11,7 +11,8 @@ export const store = configureStore({
     restaurants: restaurantsReducer,
     user: userReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(sagaMiddleware),
 });
 
 sagaMiddleware.run(rootSaga);

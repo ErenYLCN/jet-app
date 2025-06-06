@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { Restaurant } from "../../features/restaurants/types/Restaurant";
+import type { Restaurant } from "../../../features/restaurants/types/Restaurant";
 
 interface RestaurantsState {
   restaurants: Restaurant[];

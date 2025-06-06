@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { fetchRestaurantsStart } from "../../../store/slices/restaurantsSlice";
+import { fetchRestaurantsStart } from "../../../store/slices/restaurant/restaurantsSlice";
 import Page from "../Page";
 import IconButton from "../../ui/icon/button/IconButton";
 import Icon from "../../ui/icon/Icon";
@@ -11,6 +11,7 @@ import RestaurantDetailModal from "../../restaurant/detail-modal/RestaurantDetai
 import RestaurantErrorMessage from "../../restaurant/error-message/RestaurantErrorMessage";
 import UserModal from "../../user/modal/UserModal";
 import Select from "../../ui/select/Select";
+import Switch from "../../ui/switch/Switch";
 import {
   useRestaurantListState,
   type SortOption,
@@ -18,7 +19,7 @@ import {
 import useModalState from "../../../hooks/modal-state/useModalState";
 import type { Restaurant } from "../../../features/restaurants/types/Restaurant";
 import { processRestaurants } from "../../../features/restaurants/utils/restaurantUtils";
-import { FilterBySearchQuery } from "../../../features/restaurants/strategies/filter/RestaurantFilterStrategy";
+import { RestaurantFilterRegistry } from "../../../features/restaurants/strategies/filter/RestaurantFilterStrategy";
 import { RestaurantSortStrategyRegistry } from "../../../features/restaurants/strategies/sort/RestaurantSortStrategy";
 
 import styles from "./HomePage.module.css";
@@ -36,8 +37,20 @@ function HomePage() {
     (state) => state.restaurants
   );
   const dispatch = useAppDispatch();
-  const { searchQuery, page, sort, setSearchQuery, setPage, setSort } =
-    useRestaurantListState();
+  const {
+    searchQuery,
+    page,
+    sort,
+    openNow,
+    isNew,
+    freeDelivery,
+    setSearchQuery,
+    setPage,
+    setSort,
+    setOpenNow,
+    setIsNew,
+    setFreeDelivery,
+  } = useRestaurantListState();
   const [inputValue, setInputValue] = useState(searchQuery || "");
   const [selectedRestaurant, setSelectedRestaurant] =
     useState<Restaurant | null>(null);
@@ -89,9 +102,16 @@ function HomePage() {
   };
 
   const sortRegistry = useMemo(() => new RestaurantSortStrategyRegistry(), []);
+  const filterRegistry = useMemo(() => new RestaurantFilterRegistry(), []);
   const filterStrategies = useMemo(
-    () => [new FilterBySearchQuery(searchQuery)],
-    [searchQuery]
+    () =>
+      filterRegistry.getStrategies({
+        query: searchQuery,
+        openNow,
+        isNew,
+        freeDelivery,
+      }),
+    [filterRegistry, searchQuery, openNow, isNew, freeDelivery]
   );
   const sortStrategy = useMemo(
     () => sortRegistry.getStrategy(sort),
@@ -116,28 +136,59 @@ function HomePage() {
       }
     >
       <div className={styles.content}>
-        <div className={styles.searchContainer}>
-          <div className={styles.searchWrapper}>
-            <RestaurantSearchInput
-              customClassName={styles.searchInput}
-              value={inputValue}
-              onChange={(value) => {
-                setInputValue(value);
+        <div className={styles.filtersContainer}>
+          <div className={styles.searchContainer}>
+            <div className={styles.searchWrapper}>
+              <RestaurantSearchInput
+                customClassName={styles.searchInput}
+                value={inputValue}
+                onChange={(value) => {
+                  setInputValue(value);
 
-                if (value === "") {
-                  setSearchQuery("");
-                }
-              }}
-              onSearch={handleSearch}
-            />
+                  if (value === "") {
+                    setSearchQuery("");
+                  }
+                }}
+                onSearch={handleSearch}
+              />
 
-            <Select
-              label="Sort by"
-              options={SORT_SELECT_OPTIONS}
-              value={sort}
-              onChange={(e) => setSort(e.target.value as SortOption)}
-              customClassName={styles.sortSelect}
-            />
+              <Select
+                label="Sort by"
+                options={SORT_SELECT_OPTIONS}
+                value={sort}
+                onChange={(e) => setSort(e.target.value as SortOption)}
+                customClassName={styles.sortSelect}
+              />
+            </div>
+          </div>
+
+          <div className={styles.switchesContainer}>
+            <div className={styles.switchGroup}>
+              <Switch
+                description="Filter by restaurants open now"
+                value={openNow}
+                onChange={setOpenNow}
+              />
+              <span className={styles.switchLabel}>Open Now</span>
+            </div>
+
+            <div className={styles.switchGroup}>
+              <Switch
+                description="Filter by new restaurants"
+                value={isNew}
+                onChange={setIsNew}
+              />
+              <span className={styles.switchLabel}>New</span>
+            </div>
+
+            <div className={styles.switchGroup}>
+              <Switch
+                description="Filter by restaurants with free delivery"
+                value={freeDelivery}
+                onChange={setFreeDelivery}
+              />
+              <span className={styles.switchLabel}>Free Delivery</span>
+            </div>
           </div>
         </div>
 

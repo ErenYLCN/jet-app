@@ -3,7 +3,7 @@ import restaurantsReducer, {
   fetchRestaurantsSuccess,
   fetchRestaurantsFailure,
 } from "./restaurantsSlice";
-import type { Restaurant } from "../../features/restaurants/types/Restaurant";
+import type { Restaurant } from "../../../features/restaurants/types/Restaurant";
 
 describe("restaurantsSlice", () => {
   const initialState = {

@@ -12,6 +12,11 @@ jest.mock("./Input.module.css", () => ({
   actions: "actions",
 }));
 
+jest.mock("react", () => ({
+  ...jest.requireActual("react"),
+  useId: () => `mock-id-${Math.random().toString(36).substr(2, 9)}`,
+}));
+
 // Test wrapper component to handle ref
 const TestInput = (props: InputProps) => {
   const ref = useRef<HTMLInputElement>(null);

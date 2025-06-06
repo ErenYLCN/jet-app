@@ -5,11 +5,37 @@
   gap: 16px;
 }
 
+.filtersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
 .searchContainer {
   display: flex;
   justify-content: center;
   gap: 16px;
   width: 100%;
+}
+
+.switchesContainer {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.switchGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.switchLabel {
+  font-size: var(--font-size-sm);
+  color: var(--text-color);
+  font-weight: 500;
 }
 
 .searchWrapper {
@@ -59,5 +85,13 @@
 
   .searchInput {
     flex: unset;
+  }
+
+  .switchesContainer {
+    gap: 16px;
+  }
+
+  .switchLabel {
+    font-size: var(--font-size-sm);
   }
 }

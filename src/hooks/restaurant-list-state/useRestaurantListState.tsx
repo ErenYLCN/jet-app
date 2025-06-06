@@ -12,12 +12,18 @@ interface RestaurantListState {
   searchQuery: string;
   page: number;
   sort: SortOption;
+  openNow: boolean;
+  isNew: boolean;
+  freeDelivery: boolean;
 }
 
 interface RestaurantListActions {
   setSearchQuery: (query: string) => void;
   setPage: (page: number) => void;
   setSort: (sort: SortOption) => void;
+  setOpenNow: (openNow: boolean) => void;
+  setIsNew: (isNew: boolean) => void;
+  setFreeDelivery: (freeDelivery: boolean) => void;
   setMultiple: (updates: Partial<RestaurantListState>) => void;
 }
 
@@ -28,6 +34,9 @@ export const useRestaurantListState = (): RestaurantListState &
   const searchQuery = searchParams.get("q") || "";
   const page = Number(searchParams.get("page")) || 1;
   const sort = (searchParams.get("sort") as SortOption) || "bestMatch";
+  const openNow = searchParams.get("openNow") === "true";
+  const isNew = searchParams.get("isNew") === "true";
+  const freeDelivery = searchParams.get("freeDelivery") === "true";
 
   // Validate and clean up query parameters on initial load
   useEffect(() => {
@@ -94,6 +103,39 @@ export const useRestaurantListState = (): RestaurantListState &
     setSearchParams(newParams);
   };
 
+  const setOpenNow = (openNow: boolean) => {
+    const newParams = new URLSearchParams(searchParams);
+    if (openNow) {
+      newParams.set("openNow", "true");
+    } else {
+      newParams.delete("openNow");
+    }
+    newParams.set("page", "1");
+    setSearchParams(newParams);
+  };
+
+  const setIsNew = (isNew: boolean) => {
+    const newParams = new URLSearchParams(searchParams);
+    if (isNew) {
+      newParams.set("isNew", "true");
+    } else {
+      newParams.delete("isNew");
+    }
+    newParams.set("page", "1");
+    setSearchParams(newParams);
+  };
+
+  const setFreeDelivery = (freeDelivery: boolean) => {
+    const newParams = new URLSearchParams(searchParams);
+    if (freeDelivery) {
+      newParams.set("freeDelivery", "true");
+    } else {
+      newParams.delete("freeDelivery");
+    }
+    newParams.set("page", "1");
+    setSearchParams(newParams);
+  };
+
   const setMultiple = (updates: Partial<RestaurantListState>) => {
     const newParams = new URLSearchParams(searchParams);
 
@@ -117,6 +159,30 @@ export const useRestaurantListState = (): RestaurantListState &
       }
     }
 
+    if (updates.openNow !== undefined) {
+      if (updates.openNow) {
+        newParams.set("openNow", "true");
+      } else {
+        newParams.delete("openNow");
+      }
+    }
+
+    if (updates.isNew !== undefined) {
+      if (updates.isNew) {
+        newParams.set("isNew", "true");
+      } else {
+        newParams.delete("isNew");
+      }
+    }
+
+    if (updates.freeDelivery !== undefined) {
+      if (updates.freeDelivery) {
+        newParams.set("freeDelivery", "true");
+      } else {
+        newParams.delete("freeDelivery");
+      }
+    }
+
     setSearchParams(newParams);
   };
 
@@ -124,9 +190,15 @@ export const useRestaurantListState = (): RestaurantListState &
     searchQuery,
     page,
     sort,
+    openNow,
+    isNew,
+    freeDelivery,
     setSearchQuery,
     setPage,
     setSort,
+    setOpenNow,
+    setIsNew,
+    setFreeDelivery,
     setMultiple,
   };
 };

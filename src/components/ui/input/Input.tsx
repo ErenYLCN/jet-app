@@ -1,4 +1,5 @@
 import React, {
+  useId,
   type InputHTMLAttributes,
   type ReactNode,
   type RefObject,
@@ -23,7 +24,7 @@ const Input: React.FC<InputProps> = ({
   customClassName,
   ...props
 }) => {
-  const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
+  const inputId = useId();
 
   return (
     <label
@@ -33,7 +34,7 @@ const Input: React.FC<InputProps> = ({
       {leftIcon && <span className={styles.icon}>{leftIcon}</span>}
       <input
         ref={ref}
-        id={inputId}
+        id={id || inputId}
         className={styles.input}
         {...props}
         aria-label={label}
