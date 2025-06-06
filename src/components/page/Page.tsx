@@ -4,14 +4,13 @@ import styles from "./Page.module.css";
 
 interface PageProps {
   children: ReactNode;
-  title?: string;
   headerActions?: ReactNode;
 }
 
-export default function Page({ children, title, headerActions }: PageProps) {
+export default function Page({ children, headerActions }: PageProps) {
   return (
     <div className={styles.page}>
-      <Header title={title} headerActions={headerActions} />
+      <Header headerActions={headerActions} />
       <main className={styles.content}>{children}</main>
     </div>
   );

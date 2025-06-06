@@ -21,7 +21,7 @@ export default function Switch({
   ...props
 }: SwitchProps) {
   const switchId = useId();
-  
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log("Switch changed:", event.target.checked);
 
@@ -38,7 +38,7 @@ export default function Switch({
         aria-label={description}
         checked={value}
         onChange={handleChange}
-        className={styles.input}
+        className={cn(styles.input, "sr-only")}
         {...props}
       />
       <label htmlFor={switchId} className={styles.label}>

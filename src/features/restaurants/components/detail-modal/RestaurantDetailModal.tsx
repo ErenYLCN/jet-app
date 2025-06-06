@@ -1,7 +1,7 @@
-import Modal from "../../ui/modal/Modal";
-import IconButton from "../../ui/icon/button/IconButton";
+import Modal from "../../../../components/ui/modal/Modal";
+import IconButton from "../../../../components/ui/icon/button/IconButton";
 import RestaurantMapView from "../map-view/RestaurantMapView";
-import type { Restaurant } from "../../../features/restaurants/types/Restaurant";
+import type { Restaurant } from "../../types/Restaurant";
 import styles from "./RestaurantDetailModal.module.css";
 
 interface RestaurantDetailModalProps {

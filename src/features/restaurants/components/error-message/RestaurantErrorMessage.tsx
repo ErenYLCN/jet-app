@@ -1,4 +1,4 @@
-import Button from "../../ui/button/Button";
+import Button from "../../../../components/ui/button/Button";
 import styles from "./RestaurantErrorMessage.module.css";
 
 interface RestaurantErrorMessageProps {
@@ -6,12 +6,13 @@ interface RestaurantErrorMessageProps {
   onRetry: () => void;
 }
 
-function RestaurantErrorMessage({ error, onRetry }: RestaurantErrorMessageProps) {
+function RestaurantErrorMessage({
+  error,
+  onRetry,
+}: RestaurantErrorMessageProps) {
   return (
     <div className={styles.errorContainer}>
-      <p className={styles.errorMessage}>
-        Error loading restaurants: {error}
-      </p>
+      <p className={styles.errorMessage}>Error loading restaurants: {error}</p>
       <Button onClick={onRetry} variant="primary" size="sm">
         Try Again
       </Button>

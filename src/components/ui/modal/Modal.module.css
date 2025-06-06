@@ -12,13 +12,6 @@
   padding: 1rem;
 }
 
-@media (max-width: 768px) {
-  .overlay {
-    padding: 0;
-    align-items: stretch;
-  }
-}
-
 .modal {
   background: white;
   border-radius: 8px;
@@ -31,6 +24,11 @@
 }
 
 @media (max-width: 768px) {
+  .overlay {
+    padding: 0;
+    align-items: stretch;
+  }
+
   .modal {
     width: 100vw;
     height: 100vh;

@@ -1,28 +1,28 @@
 import { useEffect, useState, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { fetchRestaurantsStart } from "../../../store/slices/restaurant/restaurantsSlice";
-import Page from "../Page";
-import IconButton from "../../ui/icon/button/IconButton";
-import Icon from "../../ui/icon/Icon";
-import RestaurantSearchInput from "../../restaurant/search-input/RestaurantSearchInput";
-import RestaurantList from "../../restaurant/list/RestaurantList";
-import Spinner from "../../ui/spinner/Spinner";
-import RestaurantDetailModal from "../../restaurant/detail-modal/RestaurantDetailModal";
-import RestaurantErrorMessage from "../../restaurant/error-message/RestaurantErrorMessage";
-import UserModal from "../../user/modal/UserModal";
-import Select from "../../ui/select/Select";
-import Switch from "../../ui/switch/Switch";
+import Page from "../../../components/page/Page";
+import IconButton from "../../../components/ui/icon/button/IconButton";
+import Icon from "../../../components/ui/icon/Icon";
+import RestaurantSearchInput from "../components/search-input/RestaurantSearchInput";
+import RestaurantList from "../components/list/RestaurantList";
+import Spinner from "../../../components/ui/spinner/Spinner";
+import RestaurantDetailModal from "../components/detail-modal/RestaurantDetailModal";
+import RestaurantErrorMessage from "../components/error-message/RestaurantErrorMessage";
+import UserModal from "../../../components/user/modal/UserModal";
+import Select from "../../../components/ui/select/Select";
+import Switch from "../../../components/ui/switch/Switch";
 import {
   useRestaurantListState,
   type SortOption,
-} from "../../../hooks/restaurant-list-state/useRestaurantListState";
+} from "../hooks/list-state/useRestaurantListState";
 import useModalState from "../../../hooks/modal-state/useModalState";
-import type { Restaurant } from "../../../features/restaurants/types/Restaurant";
-import { processRestaurants } from "../../../features/restaurants/utils/restaurantUtils";
-import { RestaurantFilterRegistry } from "../../../features/restaurants/strategies/filter/RestaurantFilterStrategy";
-import { RestaurantSortStrategyRegistry } from "../../../features/restaurants/strategies/sort/RestaurantSortStrategy";
+import type { Restaurant } from "../types/Restaurant";
+import { processRestaurants } from "../utils/restaurantUtils";
+import { RestaurantFilterRegistry } from "../strategies/filter/RestaurantFilterStrategy";
+import { RestaurantSortStrategyRegistry } from "../strategies/sort/RestaurantSortStrategy";
 
-import styles from "./HomePage.module.css";
+import styles from "./RestaurantsPage.module.css";
 
 const SORT_SELECT_OPTIONS: Array<{ value: SortOption; label: string }> = [
   { value: "bestMatch", label: "Best Match" },
@@ -32,7 +32,7 @@ const SORT_SELECT_OPTIONS: Array<{ value: SortOption; label: string }> = [
   { value: "deliveryCost", label: "Delivery Cost" },
 ];
 
-function HomePage() {
+function RestaurantsPage() {
   const { restaurants, loading, error } = useAppSelector(
     (state) => state.restaurants
   );
@@ -124,7 +124,6 @@ function HomePage() {
 
   return (
     <Page
-      title="Restaurants Near You"
       headerActions={
         <IconButton
           onClick={openUserModal}
@@ -238,4 +237,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default RestaurantsPage;

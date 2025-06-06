@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import RestaurantMapView from "./RestaurantMapView";
-import type { Restaurant } from "../../../features/restaurants/types/Restaurant";
+import type { Restaurant } from "../../types/Restaurant";
 import { useJsApiLoader } from "@react-google-maps/api";
 
 // Mock Google Maps global object
@@ -28,7 +28,7 @@ if (typeof window !== "undefined") {
 }
 
 // Mock the env utility function
-jest.mock("../../../utils/env/env", () => ({
+jest.mock("../../../../utils/env/env", () => ({
   getGoogleMapsApiKey: jest.fn(() => "test-api-key"),
 }));
 

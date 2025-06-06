@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import RestaurantList from "./RestaurantList";
-import type { Restaurant } from "../../../features/restaurants/types/Restaurant";
+import type { Restaurant } from "../../types/Restaurant";
 
 // Mock CSS modules
 jest.mock("./RestaurantList.module.css", () => ({
@@ -35,7 +35,7 @@ jest.mock("../card/RestaurantCard", () => {
 });
 
 // Mock Pagination component
-jest.mock("../../ui/pagination/Pagination", () => {
+jest.mock("../../../../components/ui/pagination/Pagination", () => {
   return function MockPagination({
     currentPage,
     totalPages,

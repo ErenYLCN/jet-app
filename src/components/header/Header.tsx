@@ -3,6 +3,7 @@ import { useAppSelector } from "../../store/hooks";
 import { useNavigate } from "react-router";
 import styles from "./Header.module.css";
 import IconButton from "../ui/icon/button/IconButton";
+import cn from "../../utils/class-names/classNames";
 
 interface HeaderProps {
   headerActions?: ReactNode;
@@ -28,7 +29,7 @@ export default function Header({ headerActions }: HeaderProps) {
           />
         </div>
 
-        <div className={styles.centerSection}>
+        <div className={cn(styles.centerSection, "hide-sm")}>
           {postcode && (
             <span className={styles.address}>Postcode: {postcode}</span>
           )}

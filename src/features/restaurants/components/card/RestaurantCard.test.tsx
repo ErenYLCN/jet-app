@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import RestaurantCard from "./RestaurantCard";
-import type { Restaurant } from "../../../features/restaurants/types/Restaurant";
+import type { Restaurant } from "../../types/Restaurant";
 
 // Mock CSS module
 jest.mock("./RestaurantCard.module.css", () => ({

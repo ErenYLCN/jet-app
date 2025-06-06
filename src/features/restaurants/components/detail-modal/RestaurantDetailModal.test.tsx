@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import RestaurantDetailModal from "./RestaurantDetailModal";
-import type { Restaurant } from "../../../features/restaurants/types/Restaurant";
+import type { Restaurant } from "../../types/Restaurant";
 
 // Mock CSS modules
 jest.mock("./RestaurantDetailModal.module.css", () => ({
@@ -30,7 +30,7 @@ jest.mock("./RestaurantDetailModal.module.css", () => ({
 }));
 
 // Mock Modal component
-jest.mock("../../ui/modal/Modal", () => {
+jest.mock("../../../../components/ui/modal/Modal", () => {
   return function MockModal({
     isOpen,
     onClose,
@@ -50,7 +50,7 @@ jest.mock("../../ui/modal/Modal", () => {
 });
 
 // Mock IconButton component
-jest.mock("../../ui/icon/button/IconButton", () => {
+jest.mock("../../../../components/ui/icon/button/IconButton", () => {
   return function MockIconButton({
     onClick,
     description,

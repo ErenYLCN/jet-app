@@ -1,5 +1,5 @@
-import { type Restaurant } from "../../../features/restaurants/types/Restaurant";
-import cn from "../../../utils/class-names/classNames";
+import cn from "../../../../utils/class-names/classNames";
+import type { Restaurant } from "../../types/Restaurant";
 import styles from "./RestaurantCard.module.css";
 
 interface RestaurantCardProps {

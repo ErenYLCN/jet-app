@@ -59,7 +59,7 @@ describe("Spinner Component", () => {
     expect(spinner).toHaveAttribute("aria-label", "Loading");
 
     const hiddenText = screen.getByText("Loading...");
-    expect(hiddenText).toHaveClass("visuallyHidden");
+    expect(hiddenText).toHaveClass("sr-only");
   });
 
   test("renders loading text for screen readers", () => {
@@ -68,6 +68,6 @@ describe("Spinner Component", () => {
     // The loading text should be present but visually hidden
     const loadingText = screen.getByText("Loading...");
     expect(loadingText).toBeInTheDocument();
-    expect(loadingText).toHaveClass("visuallyHidden");
+    expect(loadingText).toHaveClass("sr-only");
   });
 });

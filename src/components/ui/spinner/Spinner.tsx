@@ -16,7 +16,7 @@ export default function Spinner({
       role="status"
       aria-label="Loading"
     >
-      <span className={styles.visuallyHidden}>Loading...</span>
+      <span className="sr-only">Loading...</span>
     </div>
   );
 }

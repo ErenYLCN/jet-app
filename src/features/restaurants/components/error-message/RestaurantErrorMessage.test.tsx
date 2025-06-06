@@ -10,7 +10,7 @@ jest.mock("./RestaurantErrorMessage.module.css", () => ({
 }));
 
 // Mock Button component
-jest.mock("../../ui/button/Button", () => {
+jest.mock("../../../../components/ui/button/Button", () => {
   return function MockButton({
     children,
     onClick,

@@ -1,11 +1,11 @@
 import { useRef } from "react";
-import Input from "../../ui/input/Input";
-import IconButton from "../../ui/icon/button/IconButton";
-import Button from "../../ui/button/Button";
-import SearchIcon from "../../../assets/svg/search.svg";
-import CloseIcon from "../../../assets/svg/close.svg";
+import SearchIcon from "../../../../assets/svg/search.svg";
+import CloseIcon from "../../../../assets/svg/close.svg";
 
 import styles from "./RestaurantSearchInput.module.css";
+import Input from "../../../../components/ui/input/Input";
+import IconButton from "../../../../components/ui/icon/button/IconButton";
+import Button from "../../../../components/ui/button/Button";
 
 interface RestaurantSearchInputProps {
   value: string;

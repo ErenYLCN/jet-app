@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import RestaurantCard from "../card/RestaurantCard";
-import Pagination from "../../ui/pagination/Pagination";
-import type { Restaurant } from "../../../features/restaurants/types/Restaurant";
-
 import styles from "./RestaurantList.module.css";
+import Pagination from "../../../../components/ui/pagination/Pagination";
+import type { Restaurant } from "../../types/Restaurant";
 
 interface RestaurantListProps {
   filteredRestaurants: Restaurant[];
