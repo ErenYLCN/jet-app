@@ -1,54 +1,73 @@
-# React + TypeScript + Vite
+# JET Restaurants
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern restaurant discovery application built with React and TypeScript.
 
-Currently, two official plugins are available:
+## Technologies Used
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Core Technologies
 
-## Expanding the ESLint configuration
+- **React 19** - Modern React with the latest features
+- **TypeScript** - Type-safe JavaScript development
+- **Vite** - Fast build tool and development server
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### State Management
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- **Redux Toolkit** - Modern Redux with simplified syntax
+- **Redux-Saga** - Asynchronous action handling
+- **React Redux** - React bindings for Redux
+
+### UI & Mapping
+
+- **React Google Maps API** - Interactive map functionality
+- **React Router** - Client-side routing
+
+### Development Tools
+
+- **ESLint** - Code linting and formatting
+- **Jest** - Unit testing framework
+- **Testing Library** - React component testing utilities
+- **Axios** - HTTP client for API requests
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (latest LTS version)
+- npm or yarn
+
+### Installation
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm run dev
+```
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### Testing
+
+```bash
+# Run unit tests
+npm run test:unit
+
+# Run tests with coverage
+npm run test:coverage
+
+# Open coverage report
+npm run test:coverage:report
+```
+
+### Building
+
+```bash
+npm run build
+```
+
+### Preview
+
+```bash
+npm run preview
 ```
