@@ -12,7 +12,7 @@ jest.mock("./Select.module.css", () => ({
   iconContainer: "iconContainer",
 }));
 
-jest.mock("../icon-button/Icon", () => {
+jest.mock("../icon/Icon", () => {
   return function MockIcon({
     name,
     alt,

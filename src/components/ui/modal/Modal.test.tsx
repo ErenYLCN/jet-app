@@ -14,7 +14,7 @@ jest.mock("./Modal.module.css", () => ({
 }));
 
 // Mock IconButton component
-jest.mock("../icon-button/button/IconButton", () => {
+jest.mock("../icon/button/IconButton", () => {
   return function MockIconButton({
     description,
     onClick,

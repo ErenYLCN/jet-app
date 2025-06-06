@@ -16,7 +16,7 @@ export function processRestaurants(
   filterStrategies: RestaurantFilterStrategy[],
   sortStrategy: SortStrategy
 ): Restaurant[] {
-  let processedRestaurants = restaurants;
+  let processedRestaurants = [...restaurants];
 
   for (const filterStrategy of filterStrategies) {
     processedRestaurants = filterStrategy.apply(processedRestaurants);

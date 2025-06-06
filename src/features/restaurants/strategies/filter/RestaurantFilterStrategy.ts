@@ -12,11 +12,11 @@ export class FilterBySearchQuery implements RestaurantFilterStrategy {
   }
 
   apply(data: Restaurant[]): Restaurant[] {
-    if (!this.searchQuery) {
+    if (!this.searchQuery || !this.searchQuery.trim()) {
       return data;
     }
 
-    const query = this.searchQuery.toLowerCase();
+    const query = this.searchQuery.trim().toLowerCase();
 
     return data.filter(
       (restaurant) =>

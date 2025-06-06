@@ -14,10 +14,11 @@ export default {
       },
     ],
   },
-  setupFilesAfterEnv: ["@testing-library/jest-dom"],
+  setupFilesAfterEnv: ["@testing-library/jest-dom", "./jest.setup.js"],
   collectCoverage: false,
   collectCoverageFrom: [
     "src/**/*.{ts,tsx}",
+    "!src/components/page/**/*",
     "!src/**/*.d.ts",
     "!src/main.tsx",
     "!src/vite-env.d.ts",

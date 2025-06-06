@@ -45,7 +45,7 @@ function RestaurantList({
         ))}
       </ul>
 
-      {onPageChange && (
+      {onPageChange && currentRestaurants.length > 0 && (
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
