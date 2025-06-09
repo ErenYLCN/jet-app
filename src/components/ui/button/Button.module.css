@@ -7,7 +7,7 @@
   cursor: pointer;
   font: inherit;
   font-weight: 500;
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-md);
   transition: all 0.2s ease;
 }
 
@@ -42,30 +42,30 @@
 }
 
 .primary {
-  background-color: var(--primary-color);
+  background-color: var(--color-primary);
   color: white;
 }
 
 .primary:hover:not(:disabled) {
-  background-color: var(--primary-hover);
+  background-color: var(--color-primary-hover);
 }
 
 .secondary {
-  background-color: var(--secondary-color);
-  color: var(--secondary-text);
+  background-color: var(--color-secondary);
+  color: var(--text-color);
 }
 
 .secondary:hover:not(:disabled) {
-  background-color: var(--secondary-hover);
+  background-color: var(--color-secondary-hover);
 }
 
 .ghost {
   background-color: transparent;
-  color: var(--text-color);
+  color: var(--color-text);
 }
 
 .ghost:hover:not(:disabled) {
-  background-color: var(--bg-light);
+  background-color: var(--color-bg-light);
 }
 
 .loading {

@@ -25,9 +25,9 @@
   height: 32px;
   padding: 8px;
   border: 1px solid var(--border-color);
-  background: var(--bg-color);
-  color: var(--text-color);
-  border-radius: var(--border-radius);
+  background: var(--color-bg);
+  color: var(--color-text);
+  border-radius: var(--border-radius-md);
   cursor: pointer;
   font-weight: 500;
   transition: all 0.2s ease;
@@ -39,8 +39,8 @@
 }
 
 .pageButton.active {
-  background: rgb(from var(--primary-color) r g b / 20%);
-  border-color: var(--primary-color);
+  background: rgb(from var(--color-primary) r g b / 20%);
+  border-color: var(--color-primary);
   font-weight: 600;
 }
 
@@ -50,7 +50,7 @@
   justify-content: center;
   min-width: 36px;
   height: 36px;
-  color: var(--secondary-text);
+  color: var(--color-text-light);
   font-size: var(--font-size-sm);
 }
 

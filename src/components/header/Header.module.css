@@ -38,7 +38,7 @@
 }
 
 .title {
-  color: var(--primary-color);
+  color: var(--color-primary);
   font-size: var(--font-size-2xl);
   font-weight: 700;
   margin: 0;
@@ -47,7 +47,7 @@
 
 .address {
   font-weight: 500;
-  color: var(--text-color-secondary, #64748b);
+  color: var(--color-text-secondary, #64748b);
   text-align: center;
 }
 
@@ -62,21 +62,21 @@
     padding: 12px 16px;
     gap: 8px;
   }
-  
+
   .leftSection,
   .centerSection,
   .rightSection {
     justify-content: center;
   }
-  
+
   .title {
     font-size: var(--font-size-xl);
   }
-  
+
   .address {
     font-size: var(--font-size-sm);
   }
-  
+
   .headerActions {
     justify-content: center;
   }

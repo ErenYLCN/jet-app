@@ -1,25 +1,22 @@
 :root {
-  --text-color: #000;
-  --bg-color: #fff;
-  --bg-light: #f7f7f7;
-  --primary-color: #662e9b;
-  --primary-hover: #692366;
-  --secondary-color: #43bccd;
-  --secondary-hover: #3eb2c1;
-  --secondary-text: #374151;
-  --brand-color: #f86624;
-  --contrast-color: #f9c80e;
-  --error-color: #dc2626;
+  --color-text: #000;
+  --color-text-light: #374151;
+  --color-bg: #fff;
+  --color-bg-light: #f7f7f7;
+  --color-primary: #662e9b;
+  --color-primary-hover: rgb(114, 52, 172);
+  --color-secondary: #43bccd;
+  --color-secondary-hover: #3eb2c1;
+  --color-brand: #f86624;
+  --color-error: #dc2626;
 
   --border-radius-sm: 4px;
-  --border-radius: 8px;
+  --border-radius-md: 8px;
   --border-radius-lg: 12px;
   --border-radius-full: 9999px;
 
   --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 4px 14px rgba(0, 0, 0, 0.15);
-
-  --page-content-width: 1200px;
 
   --font-size-sm: 0.875rem;
   --font-size-md: 1rem;
@@ -27,7 +24,9 @@
   --font-size-xl: 1.5rem;
   --font-size-2xl: 2rem;
 
+  --page-content-width: 1200px;
+
   --screen-sm: 768px;
 
-  --outline: 2px solid #ea3546;
+  --outline: 2px solid var(--color-primary-hover);
 }

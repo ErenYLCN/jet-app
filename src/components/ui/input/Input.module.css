@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   height: 48px;
-  border: 1px solid var(--secondary-text);
+  border: 1px solid var(--color-text-light);
   border-radius: var(--border-radius-full);
   padding: 0 4px 0 12px;
   cursor: text;
@@ -11,7 +11,7 @@
 }
 
 .inputWrapper:hover:not(:has(.actions:hover)) {
-  background-color: var(--bg-light);
+  background-color: var(--color-bg-light);
 }
 
 .icon {
@@ -26,7 +26,7 @@
   height: 100%;
   padding: 0;
   background-color: transparent;
-  color: var(--text-color);
+  color: var(--color-text);
   font-size: var(--font-size-md);
 }
 
@@ -44,7 +44,7 @@
 }
 
 .input::placeholder {
-  color: var(--secondary-text);
+  color: var(--color-text-light);
   opacity: 0.7;
 }
 
@@ -55,6 +55,6 @@
 }
 
 input:-internal-autofill-selected {
-  background-color: var(--secondary-color) !important;
-  color: var(--text-color) !important;
+  background-color: var(--color-secondary) !important;
+  color: var(--color-text) !important;
 }

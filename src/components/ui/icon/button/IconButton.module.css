@@ -3,19 +3,19 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border-radius: var(--border-radius);
-  color: var(--secondary-text);
+  border-radius: var(--border-radius-md);
+  color: var(--color-text-light);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .iconButton:not(.logo):hover {
-  background-color: var(--bg-light);
-  color: var(--text-color);
+  background-color: var(--color-bg-light);
+  color: var(--color-text);
 }
 
 .iconButton:not(.logo):focus {
   outline: var(--outline);
-  background-color: var(--bg-light);
+  background-color: var(--color-bg-light);
 }
 
 .iconButton:focus-visible {
@@ -24,7 +24,7 @@
 }
 
 .iconButton:active {
-  background-color: var(--secondary-hover);
+  background-color: var(--color-secondary-hover);
 }
 
 .iconButton[aria-disabled="true"] {

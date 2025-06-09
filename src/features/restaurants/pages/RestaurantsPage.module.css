@@ -33,7 +33,7 @@
 }
 
 .switchLabel {
-  color: var(--text-color);
+  color: var(--color-text);
   font-weight: 500;
 }
 
@@ -49,11 +49,11 @@
   text-align: center;
   padding: 48px 24px;
   font-size: var(--font-size-lg);
-  color: var(--secondary-text);
+  color: var(--color-text-light);
 }
 
 .loadingMessage {
-  color: var(--primary-color);
+  color: var(--color-primary);
 }
 
 .loadingContainer {

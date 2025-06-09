@@ -5,11 +5,11 @@
 }
 
 .clearButton {
-  color: var(--secondary-text);
+  color: var(--color-text-light);
 }
 
 .clearButton:hover {
-  color: var(--text-color);
+  color: var(--color-text);
 }
 
 .searchIconButton {
