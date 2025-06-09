@@ -92,68 +92,6 @@ describe("useRestaurantListState", () => {
     expect(result.current.sort).toBe("bestMatch");
   });
 
-  test("setMultiple updates multiple values at once", () => {
-    const { result } = renderHook(() => useRestaurantListState(), {
-      wrapper: createWrapper(),
-    });
-
-    act(() => {
-      result.current.setMultiple({
-        searchQuery: "sushi",
-        page: 2,
-        sort: "estimatedDeliveryTime",
-      });
-    });
-
-    expect(result.current.searchQuery).toBe("sushi");
-    expect(result.current.page).toBe(2);
-    expect(result.current.sort).toBe("estimatedDeliveryTime");
-  });
-
-  test("setMultiple handles partial updates", () => {
-    const { result } = renderHook(() => useRestaurantListState(), {
-      wrapper: createWrapper(["/?q=pizza&page=3&sort=reviews"]),
-    });
-
-    act(() => {
-      result.current.setMultiple({
-        page: 5,
-      });
-    });
-
-    expect(result.current.searchQuery).toBe("pizza");
-    expect(result.current.page).toBe(5);
-    expect(result.current.sort).toBe("reviews");
-  });
-
-  test("setMultiple clears search query when empty string is provided", () => {
-    const { result } = renderHook(() => useRestaurantListState(), {
-      wrapper: createWrapper(["/?q=pizza"]),
-    });
-
-    act(() => {
-      result.current.setMultiple({
-        searchQuery: "",
-      });
-    });
-
-    expect(result.current.searchQuery).toBe("");
-  });
-
-  test("setMultiple removes sort parameter when setting to bestMatch", () => {
-    const { result } = renderHook(() => useRestaurantListState(), {
-      wrapper: createWrapper(["/?sort=reviews"]),
-    });
-
-    act(() => {
-      result.current.setMultiple({
-        sort: "bestMatch",
-      });
-    });
-
-    expect(result.current.sort).toBe("bestMatch");
-  });
-
   test("validates and cleans up invalid page parameter", () => {
     const { result } = renderHook(() => useRestaurantListState(), {
       wrapper: createWrapper(["/?page=invalid"]),

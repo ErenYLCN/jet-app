@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, memo } from "react";
 import RestaurantCard from "../card/RestaurantCard";
 import styles from "./RestaurantList.module.css";
 import Pagination from "../../../../components/ui/pagination/Pagination";
@@ -55,4 +55,4 @@ function RestaurantList({
   );
 }
 
-export default RestaurantList;
+export default memo(RestaurantList);

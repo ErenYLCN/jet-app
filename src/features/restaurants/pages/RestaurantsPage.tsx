@@ -1,4 +1,11 @@
-import { useEffect, useState, useMemo } from "react";
+import {
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+  lazy,
+  Suspense,
+} from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { fetchRestaurantsStart } from "../../../store/slices/restaurant/restaurantsSlice";
 import Page from "../../../components/page/Page";
@@ -7,9 +14,7 @@ import Icon from "../../../components/ui/icon/Icon";
 import RestaurantSearchInput from "../components/search-input/RestaurantSearchInput";
 import RestaurantList from "../components/list/RestaurantList";
 import Spinner from "../../../components/ui/spinner/Spinner";
-import RestaurantDetailModal from "../components/detail-modal/RestaurantDetailModal";
 import RestaurantErrorMessage from "../components/error-message/RestaurantErrorMessage";
-import UserModal from "../../../components/user/modal/UserModal";
 import Select from "../../../components/ui/select/Select";
 import Switch from "../../../components/ui/switch/Switch";
 import {
@@ -23,6 +28,13 @@ import { RestaurantFilterRegistry } from "../strategies/filter/RestaurantFilterS
 import { RestaurantSortStrategyRegistry } from "../strategies/sort/RestaurantSortStrategy";
 
 import styles from "./RestaurantsPage.module.css";
+
+const RestaurantDetailModal = lazy(
+  () => import("../components/detail-modal/RestaurantDetailModal")
+);
+const UserModal = lazy(
+  () => import("../../../components/user/modal/UserModal")
+);
 
 const SORT_SELECT_OPTIONS: Array<{ value: SortOption; label: string }> = [
   { value: "bestMatch", label: "Best Match" },
@@ -69,37 +81,64 @@ function RestaurantsPage() {
     dispatch(fetchRestaurantsStart());
   }, [dispatch]);
 
-  const handleRefresh = () => {
+  const handleRefresh = useCallback(() => {
     dispatch(fetchRestaurantsStart());
-  };
+  }, [dispatch]);
 
-  const handleSearch = (value: string) => {
-    if (value.trim() === "") {
-      return;
-    }
-
-    setSearchQuery(value.trim());
-  };
-
-  const handlePageChange = (pageNumber: number) => {
-    setPage(pageNumber);
-
-    setTimeout(() => {
-      // Try multiple scroll methods for better compatibility
-      if (document.documentElement) {
-        document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
-      } else if (document.body) {
-        document.body.scrollTo({ top: 0, behavior: "smooth" });
-      } else {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+  const handleSearch = useCallback(
+    (value: string) => {
+      if (value.trim() === "") {
+        return;
       }
-    }, 0);
-  };
 
-  const handleRestaurantClick = (restaurant: Restaurant) => {
-    setSelectedRestaurant(restaurant);
-    openRestaurantDetailModal();
-  };
+      setSearchQuery(value.trim());
+    },
+    [setSearchQuery]
+  );
+
+  const handlePageChange = useCallback(
+    (pageNumber: number) => {
+      setPage(pageNumber);
+
+      setTimeout(() => {
+        // Try multiple scroll methods for better compatibility
+        if (document.documentElement) {
+          document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
+        } else if (document.body) {
+          document.body.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }, 0);
+    },
+    [setPage]
+  );
+
+  const handleRestaurantClick = useCallback(
+    (restaurant: Restaurant) => {
+      setSelectedRestaurant(restaurant);
+      openRestaurantDetailModal();
+    },
+    [openRestaurantDetailModal]
+  );
+
+  const handleInputChange = useCallback(
+    (value: string) => {
+      setInputValue(value);
+
+      if (value === "") {
+        setSearchQuery("");
+      }
+    },
+    [setSearchQuery]
+  );
+
+  const handleSortChange = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setSort(e.target.value as SortOption);
+    },
+    [setSort]
+  );
 
   const sortRegistry = useMemo(() => new RestaurantSortStrategyRegistry(), []);
   const filterRegistry = useMemo(() => new RestaurantFilterRegistry(), []);
@@ -141,13 +180,7 @@ function RestaurantsPage() {
               <RestaurantSearchInput
                 customClassName={styles.searchInput}
                 value={inputValue}
-                onChange={(value) => {
-                  setInputValue(value);
-
-                  if (value === "") {
-                    setSearchQuery("");
-                  }
-                }}
+                onChange={handleInputChange}
                 onSearch={handleSearch}
               />
 
@@ -155,7 +188,7 @@ function RestaurantsPage() {
                 label="Sort by"
                 options={SORT_SELECT_OPTIONS}
                 value={sort}
-                onChange={(e) => setSort(e.target.value as SortOption)}
+                onChange={handleSortChange}
                 customClassName={styles.sortSelect}
               />
             </div>
@@ -226,13 +259,21 @@ function RestaurantsPage() {
         )}
       </div>
 
-      <RestaurantDetailModal
-        isOpen={isRestaurantDetailModalOpen}
-        onClose={closeRestaurantDetailModal}
-        restaurant={selectedRestaurant}
-      />
+      {isRestaurantDetailModalOpen && (
+        <Suspense fallback={null}>
+          <RestaurantDetailModal
+            isOpen={isRestaurantDetailModalOpen}
+            onClose={closeRestaurantDetailModal}
+            restaurant={selectedRestaurant}
+          />
+        </Suspense>
+      )}
 
-      <UserModal isOpen={isUserModalOpen} onClose={closeUserModal} />
+      {isUserModalOpen && (
+        <Suspense fallback={null}>
+          <UserModal isOpen={isUserModalOpen} onClose={closeUserModal} />
+        </Suspense>
+      )}
     </Page>
   );
 }

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useSearchParams } from "react-router";
 
 export type SortOption =
@@ -24,7 +24,6 @@ interface RestaurantListActions {
   setOpenNow: (openNow: boolean) => void;
   setIsNew: (isNew: boolean) => void;
   setFreeDelivery: (freeDelivery: boolean) => void;
-  setMultiple: (updates: Partial<RestaurantListState>) => void;
 }
 
 export const useRestaurantListState = (): RestaurantListState &
@@ -74,117 +73,85 @@ export const useRestaurantListState = (): RestaurantListState &
     }
   }, [searchParams, setSearchParams]);
 
-  const setSearchQuery = (query: string) => {
-    const newParams = new URLSearchParams(searchParams);
-    if (query) {
-      newParams.set("q", query);
-    } else {
-      newParams.delete("q");
-    }
-    newParams.set("page", "1");
-    newParams.delete("sort");
-    setSearchParams(newParams);
-  };
-
-  const setPage = (pageNumber: number) => {
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set("page", String(pageNumber));
-    setSearchParams(newParams);
-  };
-
-  const setSort = (sortOption: SortOption) => {
-    const newParams = new URLSearchParams(searchParams);
-    if (sortOption === "bestMatch") {
-      newParams.delete("sort");
-    } else {
-      newParams.set("sort", sortOption);
-    }
-    newParams.set("page", "1"); // Reset to first page when sorting changes
-    setSearchParams(newParams);
-  };
-
-  const setOpenNow = (openNow: boolean) => {
-    const newParams = new URLSearchParams(searchParams);
-    if (openNow) {
-      newParams.set("openNow", "true");
-    } else {
-      newParams.delete("openNow");
-    }
-    newParams.set("page", "1");
-    setSearchParams(newParams);
-  };
-
-  const setIsNew = (isNew: boolean) => {
-    const newParams = new URLSearchParams(searchParams);
-    if (isNew) {
-      newParams.set("isNew", "true");
-    } else {
-      newParams.delete("isNew");
-    }
-    newParams.set("page", "1");
-    setSearchParams(newParams);
-  };
-
-  const setFreeDelivery = (freeDelivery: boolean) => {
-    const newParams = new URLSearchParams(searchParams);
-    if (freeDelivery) {
-      newParams.set("freeDelivery", "true");
-    } else {
-      newParams.delete("freeDelivery");
-    }
-    newParams.set("page", "1");
-    setSearchParams(newParams);
-  };
-
-  const setMultiple = (updates: Partial<RestaurantListState>) => {
-    const newParams = new URLSearchParams(searchParams);
-
-    if (updates.searchQuery !== undefined) {
-      if (updates.searchQuery) {
-        newParams.set("q", updates.searchQuery);
+  const setSearchQuery = useCallback(
+    (query: string) => {
+      const newParams = new URLSearchParams(searchParams);
+      if (query) {
+        newParams.set("q", query);
       } else {
         newParams.delete("q");
       }
-    }
+      newParams.set("page", "1");
+      newParams.delete("sort");
+      setSearchParams(newParams);
+    },
+    [searchParams, setSearchParams]
+  );
 
-    if (updates.page !== undefined) {
-      newParams.set("page", String(updates.page));
-    }
+  const setPage = useCallback(
+    (pageNumber: number) => {
+      const newParams = new URLSearchParams(searchParams);
+      newParams.set("page", String(pageNumber));
+      setSearchParams(newParams);
+    },
+    [searchParams, setSearchParams]
+  );
 
-    if (updates.sort !== undefined) {
-      if (updates.sort === "bestMatch") {
+  const setSort = useCallback(
+    (sortOption: SortOption) => {
+      const newParams = new URLSearchParams(searchParams);
+      if (sortOption === "bestMatch") {
         newParams.delete("sort");
       } else {
-        newParams.set("sort", updates.sort);
+        newParams.set("sort", sortOption);
       }
-    }
+      newParams.set("page", "1"); // Reset to first page when sorting changes
+      setSearchParams(newParams);
+    },
+    [searchParams, setSearchParams]
+  );
 
-    if (updates.openNow !== undefined) {
-      if (updates.openNow) {
+  const setOpenNow = useCallback(
+    (openNow: boolean) => {
+      const newParams = new URLSearchParams(searchParams);
+      if (openNow) {
         newParams.set("openNow", "true");
       } else {
         newParams.delete("openNow");
       }
-    }
+      newParams.set("page", "1");
+      setSearchParams(newParams);
+    },
+    [searchParams, setSearchParams]
+  );
 
-    if (updates.isNew !== undefined) {
-      if (updates.isNew) {
+  const setIsNew = useCallback(
+    (isNew: boolean) => {
+      const newParams = new URLSearchParams(searchParams);
+      if (isNew) {
         newParams.set("isNew", "true");
       } else {
         newParams.delete("isNew");
       }
-    }
+      newParams.set("page", "1");
+      setSearchParams(newParams);
+    },
+    [searchParams, setSearchParams]
+  );
 
-    if (updates.freeDelivery !== undefined) {
-      if (updates.freeDelivery) {
+  const setFreeDelivery = useCallback(
+    (freeDelivery: boolean) => {
+      const newParams = new URLSearchParams(searchParams);
+      if (freeDelivery) {
         newParams.set("freeDelivery", "true");
       } else {
         newParams.delete("freeDelivery");
       }
-    }
-
-    setSearchParams(newParams);
-  };
+      newParams.set("page", "1");
+      setSearchParams(newParams);
+    },
+    [searchParams, setSearchParams]
+  );
 
   return {
     searchQuery,
@@ -199,6 +166,5 @@ export const useRestaurantListState = (): RestaurantListState &
     setOpenNow,
     setIsNew,
     setFreeDelivery,
-    setMultiple,
   };
 };

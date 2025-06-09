@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 interface UseModalStateReturn {
   isOpen: boolean;
@@ -10,9 +10,9 @@ interface UseModalStateReturn {
 function useModalState(initialState = false): UseModalStateReturn {
   const [isOpen, setIsOpen] = useState(initialState);
 
-  const open = () => setIsOpen(true);
-  const close = () => setIsOpen(false);
-  const toggle = () => setIsOpen(!isOpen);
+  const open = useCallback(() => setIsOpen(true), []);
+  const close = useCallback(() => setIsOpen(false), []);
+  const toggle = useCallback(() => setIsOpen((prev) => !prev), []);
 
   return {
     isOpen,

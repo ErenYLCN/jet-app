@@ -55,6 +55,7 @@ export default function RestaurantCard({
           src={restaurant.logoUrl}
           alt={`${restaurant.name} logo`}
           className={styles.logo}
+          loading="lazy"
         />
       </div>
 
