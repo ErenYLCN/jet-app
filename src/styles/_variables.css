@@ -1,10 +1,14 @@
 :root {
-  --text-color: #333;
-  --primary-color: #6366f1;
-  --primary-hover: #4f46e5;
-  --secondary-color: #f3f4f6;
-  --secondary-hover: #e5e7eb;
+  --text-color: #000;
+  --bg-color: #fff;
+  --bg-light: #f7f7f7;
+  --primary-color: #662e9b;
+  --primary-hover: #692366;
+  --secondary-color: #43bccd;
+  --secondary-hover: #3eb2c1;
   --secondary-text: #374151;
+  --brand-color: #f86624;
+  --contrast-color: #f9c80e;
   --error-color: #dc2626;
 
   --border-radius-sm: 4px;
@@ -16,14 +20,14 @@
   --shadow-lg: 0 4px 14px rgba(0, 0, 0, 0.15);
 
   --page-content-width: 1200px;
-  
-  --font-size-sm: 0.875rem; 
-  --font-size-md: 1rem; 
-  --font-size-lg: 1.125rem; 
-  --font-size-xl: 1.5rem; 
-  --font-size-2xl: 2rem; 
+
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
 
   --screen-sm: 768px;
 
-  --outline: 2px solid var(--primary-color);
+  --outline: 2px solid #ea3546;
 }

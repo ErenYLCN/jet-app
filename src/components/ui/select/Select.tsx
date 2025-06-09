@@ -25,12 +25,13 @@ function Select({
   return (
     <div className={cn(styles.selectWrapper, customClassName)}>
       <div className={styles.selectContainer}>
-        <label className={styles.label}>{label}</label>
+        <span className={styles.label}>{label}</span>
         <select
           ref={ref}
           className={styles.select}
           aria-label={label}
           disabled={disabled}
+          name={label}
           {...props}
         >
           {options.map((option) => (

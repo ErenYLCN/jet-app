@@ -107,6 +107,7 @@ function Pagination({
             const isActive = currentPage === pageNumber;
             return (
               <Button
+                variant="ghost"
                 key={pageNumber}
                 onClick={() => onPageChange(pageNumber)}
                 customClassName={`${styles.pageButton} ${

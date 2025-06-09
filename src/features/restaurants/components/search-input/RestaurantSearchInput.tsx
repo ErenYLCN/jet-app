@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import SearchIcon from "../../../../assets/svg/search.svg";
-import CloseIcon from "../../../../assets/svg/close.svg";
 
 import styles from "./RestaurantSearchInput.module.css";
 import Input from "../../../../components/ui/input/Input";
@@ -62,13 +61,13 @@ function RestaurantSearchInput({
           {value && (
             <>
               <IconButton
+                icon="close"
                 description="Clear search"
                 size="sm"
                 onClick={clearSearch}
                 customClassName={styles.clearButton}
-              >
-                <img src={CloseIcon} />
-              </IconButton>
+              />
+
               <Button
                 customClassName="hide-sm"
                 onClick={handleSearch}

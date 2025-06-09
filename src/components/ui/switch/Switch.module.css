@@ -7,7 +7,7 @@
   display: block;
   width: 44px;
   height: 24px;
-  background-color: var(--secondary-color);
+  background: rgb(from var(--secondary-color) r g b / 40%);
   border-radius: var(--border-radius-full);
   position: relative;
   cursor: pointer;
@@ -15,7 +15,7 @@
 }
 
 .label:hover {
-  background-color: var(--secondary-hover);
+  background: rgb(from var(--secondary-color) r g b / 70%);
 }
 
 .input:checked + .label {

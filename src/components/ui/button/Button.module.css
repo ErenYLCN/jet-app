@@ -1,11 +1,12 @@
 .button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   border: none;
-  background: transparent;
   cursor: pointer;
   font: inherit;
+  font-weight: 500;
   border-radius: var(--border-radius);
   transition: all 0.2s ease;
 }
@@ -56,6 +57,15 @@
 
 .secondary:hover:not(:disabled) {
   background-color: var(--secondary-hover);
+}
+
+.ghost {
+  background-color: transparent;
+  color: var(--text-color);
+}
+
+.ghost:hover:not(:disabled) {
+  background-color: var(--bg-light);
 }
 
 .loading {

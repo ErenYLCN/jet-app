@@ -8,7 +8,7 @@ export interface ButtonProps
   right?: React.ReactNode;
   customClassName?: string;
   ref?: React.Ref<HTMLButtonElement | null>;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "ghost";
   size?: "sm" | "md" | "lg";
   loading?: boolean;
 }

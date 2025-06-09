@@ -9,13 +9,13 @@
 }
 
 .iconButton:not(.logo):hover {
-  background-color: var(--secondary-color);
+  background-color: var(--bg-light);
   color: var(--text-color);
 }
 
 .iconButton:not(.logo):focus {
   outline: var(--outline);
-  background-color: var(--secondary-color);
+  background-color: var(--bg-light);
 }
 
 .iconButton:focus-visible {

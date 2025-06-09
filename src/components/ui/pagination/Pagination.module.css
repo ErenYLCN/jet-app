@@ -21,8 +21,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 36px;
-  height: 36px;
+  min-width: 32px;
+  height: 32px;
   padding: 8px;
   border: 1px solid var(--border-color);
   background: var(--bg-color);
@@ -33,20 +33,15 @@
   transition: all 0.2s ease;
 }
 
-.pageButton:hover:not(:disabled) {
-  background: var(--secondary-color);
-  border-color: var(--primary-color);
-}
-
 .pageButton:disabled {
   cursor: not-allowed;
   opacity: 0.6;
 }
 
 .pageButton.active {
-  background: var(--primary-color);
-  color: var(--primary-text);
+  background: rgb(from var(--primary-color) r g b / 20%);
   border-color: var(--primary-color);
+  font-weight: 600;
 }
 
 .ellipsis {
