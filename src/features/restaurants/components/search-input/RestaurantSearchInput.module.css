@@ -11,3 +11,7 @@
 .clearButton:hover {
   color: var(--text-color);
 }
+
+.searchIconButton {
+  margin-right: 8px;
+}

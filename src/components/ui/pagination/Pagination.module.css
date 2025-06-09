@@ -29,7 +29,6 @@
   color: var(--text-color);
   border-radius: var(--border-radius);
   cursor: pointer;
-  font-size: var(--font-size-sm);
   font-weight: 500;
   transition: all 0.2s ease;
 }
@@ -65,23 +64,23 @@
     gap: 4px;
     padding: 16px 0;
   }
-  
+
   .pageNumbers {
     margin: 0 8px;
     gap: 2px;
   }
-  
+
   .pageButton {
     min-width: 32px;
     height: 32px;
     font-size: var(--font-size-xs);
   }
-  
+
   .ellipsis {
     min-width: 32px;
     height: 32px;
   }
-  
+
   .navButton {
     min-width: 70px;
     font-size: var(--font-size-xs);

@@ -6,6 +6,7 @@ import styles from "./RestaurantSearchInput.module.css";
 import Input from "../../../../components/ui/input/Input";
 import IconButton from "../../../../components/ui/icon/button/IconButton";
 import Button from "../../../../components/ui/button/Button";
+import cn from "../../../../utils/class-names/classNames";
 
 interface RestaurantSearchInputProps {
   value: string;
@@ -68,9 +69,21 @@ function RestaurantSearchInput({
               >
                 <img src={CloseIcon} />
               </IconButton>
-              <Button onClick={handleSearch} variant="primary" size="lg">
+              <Button
+                customClassName="hide-sm"
+                onClick={handleSearch}
+                variant="primary"
+                size="lg"
+              >
                 Search
               </Button>
+              <IconButton
+                icon="search"
+                description="Search"
+                size="sm"
+                onClick={handleSearch}
+                customClassName={cn(styles.searchIconButton, "hide-lg")}
+              />
             </>
           )}
         </div>

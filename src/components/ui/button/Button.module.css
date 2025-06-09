@@ -23,7 +23,6 @@
 .sm {
   padding: 0 12px;
   gap: 6px;
-  font-size: var(--font-size-sm);
   height: 32px;
 }
 
@@ -73,4 +72,18 @@
 
 .loading.lg {
   min-width: 120px;
+}
+
+@media (max-width: 768px) {
+  .sm {
+    padding: 0 8px;
+  }
+
+  .md {
+    padding: 0 10px;
+  }
+
+  .lg {
+    padding: 0 12px;
+  }
 }

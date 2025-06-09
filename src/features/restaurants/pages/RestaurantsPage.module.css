@@ -33,7 +33,6 @@
 }
 
 .switchLabel {
-  font-size: var(--font-size-sm);
   color: var(--text-color);
   font-weight: 500;
 }
@@ -78,7 +77,7 @@
     align-items: stretch;
     gap: 12px;
   }
-  
+
   .sortSelect {
     min-width: unset;
   }
