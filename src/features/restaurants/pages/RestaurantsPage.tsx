@@ -26,7 +26,7 @@ import type { Restaurant } from "../types/Restaurant";
 import { processRestaurants } from "../utils/restaurantUtils";
 import { RestaurantFilterRegistry } from "../strategies/filter/RestaurantFilterStrategy";
 import { RestaurantSortStrategyRegistry } from "../strategies/sort/RestaurantSortStrategy";
-
+import { SORT_SELECT_OPTIONS } from "../constants/restaurantConstants";
 import styles from "./RestaurantsPage.module.css";
 
 const RestaurantDetailModal = lazy(
@@ -35,14 +35,6 @@ const RestaurantDetailModal = lazy(
 const UserModal = lazy(
   () => import("../../../components/user/modal/UserModal")
 );
-
-const SORT_SELECT_OPTIONS: Array<{ value: SortOption; label: string }> = [
-  { value: "bestMatch", label: "Best Match" },
-  { value: "reviews", label: "Rating (High to Low)" },
-  { value: "estimatedDeliveryTime", label: "Delivery Time" },
-  { value: "minOrderAmount", label: "Min Order Amount" },
-  { value: "deliveryCost", label: "Delivery Cost" },
-];
 
 function RestaurantsPage() {
   const { restaurants, loading, error } = useAppSelector(
