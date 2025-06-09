@@ -2,6 +2,10 @@
 
 A modern restaurant discovery application built with React and TypeScript.
 
+## Important
+
+- **Google Maps API Origin Restriction**: Since the api key is not securely stored, the Google Maps API will only work when the application is accessed from `http://localhost:4173/` or `http://localhost:5173/`. Make sure to run your development server on one of these ports for the maps functionality to work properly.
+
 ## Technologies Used
 
 ### Core Technologies
