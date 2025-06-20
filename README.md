@@ -23,6 +23,9 @@ A modern restaurant discovery application built with React and TypeScript, showc
 - **URL State Management**: Shareable links with preserved filter states
 - **Loading States**: Loading indicators and error handling
 - **Accessibility**: WCAG compliant with proper ARIA labels and keyboard navigation
+  
+<img width="363" alt="image" src="https://github.com/user-attachments/assets/66e21ddd-f489-4125-b503-8dd2948e7494" /><img width="356" alt="image" src="https://github.com/user-attachments/assets/888b3713-23b1-4bb8-8506-359ded7e8bba" />
+
 
 ## 🏗️ Architecture Overview
 
