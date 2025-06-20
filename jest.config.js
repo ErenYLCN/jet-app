@@ -23,7 +23,7 @@ export default {
     "!src/vite-env.d.ts",
     "!src/**/*.test.{ts,tsx}",
     "!src/types/**/*",
-    "!src/**/pages/**/*",
+    "!src/**/features/**/*",
   ],
   coverageDirectory: "coverage",
   coverageReporters: ["text", "lcov", "html"],

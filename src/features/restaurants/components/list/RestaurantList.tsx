@@ -24,6 +24,10 @@ function RestaurantList({
   const endIndex = startIndex + itemsPerPage;
   const currentRestaurants = filteredRestaurants.slice(startIndex, endIndex);
 
+  const startRange = filteredRestaurants.length > 0 ? startIndex + 1 : 0;
+  const endRange = Math.min(endIndex, filteredRestaurants.length);
+  const totalCount = filteredRestaurants.length;
+
   useEffect(() => {
     if (totalPages > 0 && currentPage > totalPages && onPageChange) {
       onPageChange(1);
@@ -32,6 +36,13 @@ function RestaurantList({
 
   return (
     <div className={styles.restaurantListContainer}>
+      {totalCount > 0 && (
+        <div className={styles.resultsLabel}>
+          Showing {startRange}-{endRange} of {totalCount} restaurant
+          {totalCount !== 1 ? "s" : ""}
+        </div>
+      )}
+
       <ul className={styles.restaurantsList}>
         {currentRestaurants.map((restaurant) => (
           <li className={styles.restaurantItem} key={restaurant.id}>
